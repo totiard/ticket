@@ -79,6 +79,15 @@
         .output-ticket {
             border-left: 5px solid #4f46e5;
         }
+        /* Toast/Popup Style */
+        #toast-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+            z-index: 100;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased flex flex-col min-h-screen">
@@ -190,7 +199,6 @@
                     </div>
                 </div>
                 <textarea id="output" readonly class="flex-grow w-full bg-gray-900 text-gray-300 rounded-lg p-4 font-mono text-sm whitespace-pre border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none custom-scrollbar transition-all duration-300 output-ticket" style="line-height: 1.6;"></textarea>
-                <div id="copy-feedback" class="text-center text-green-400 font-medium h-6 mt-2 transition-opacity duration-300 opacity-0">Teks berhasil disalin!</div>
             </div>
         </div>
     </div>
@@ -198,10 +206,13 @@
         <p class="text-sm text-gray-400">Dibuat oleh <a href="https://totiard.github.io/Profile-New/" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-400 hover:text-indigo-300">Toti Ardianysah</a></p>
     </footer>
 
-    <!-- Datalists for DOB inputs -->
-    <datalist id="day-list"></datalist>
+    <!-- Toast/Popup -->
+    <div id="toast-popup" class="hidden opacity-0 bg-green-500 text-white text-sm font-bold px-6 py-3 rounded-lg shadow-lg">
+        <i class="fa-solid fa-check-circle mr-2"></i> Teks berhasil disalin!
+    </div>
+
+    <!-- Datalist for Month input -->
     <datalist id="month-list"></datalist>
-    <datalist id="year-list"></datalist>
 
     <script>
         // --- DATA ---
@@ -236,7 +247,7 @@
             lockButton: document.getElementById('lockButton'),
             lockIcon: document.getElementById('lockIcon'),
             unlockIcon: document.getElementById('unlockIcon'),
-            copyFeedback: document.getElementById('copy-feedback'),
+            toastPopup: document.getElementById('toast-popup'),
         };
 
         // --- STATE ---
@@ -394,9 +405,9 @@
                                 <input type="text" id="paxName${i}" placeholder="Nama Lengkap" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                             <div class="grid grid-cols-3 gap-2">
-                                <input type="number" id="paxDay${i}" list="day-list" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="number" id="paxDay${i}" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                                 <input type="text" id="paxMonth${i}" list="month-list" placeholder="Bulan" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
-                                <input type="number" id="paxYear${i}" list="year-list" placeholder="Tahun" min="1500" max="2100" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="number" id="paxYear${i}" placeholder="Tahun" min="1500" max="2100" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                         </div>
                     `;
@@ -517,8 +528,20 @@
         elements.copyButton.addEventListener('click', () => {
             elements.output.select();
             document.execCommand('copy');
-            elements.copyFeedback.classList.remove('opacity-0');
-            setTimeout(() => { elements.copyFeedback.classList.add('opacity-0'); }, 2000);
+            
+            // Show toast
+            elements.toastPopup.classList.remove('hidden');
+            setTimeout(() => {
+                elements.toastPopup.classList.remove('opacity-0');
+            }, 10); // Small delay to allow transition
+
+            // Hide toast after 2 seconds
+            setTimeout(() => {
+                elements.toastPopup.classList.add('opacity-0');
+                setTimeout(() => {
+                    elements.toastPopup.classList.add('hidden');
+                }, 300); // Wait for transition to finish
+            }, 2000);
         });
 
         function switchTab(tabName) {
@@ -543,26 +566,12 @@
             // elements.flightDate.valueAsDate = today;
 
             // Populate DOB datalists
-            const dayDatalist = document.getElementById('day-list');
-            for (let i = 1; i <= 31; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                dayDatalist.appendChild(option);
-            }
-
             const monthDatalist = document.getElementById('month-list');
             monthIndonesian.forEach(month => {
                 const option = document.createElement('option');
                 option.value = month;
                 monthDatalist.appendChild(option);
             });
-
-            const yearDatalist = document.getElementById('year-list');
-            for (let i = 2100; i >= 1500; i--) {
-                const option = document.createElement('option');
-                option.value = i;
-                yearDatalist.appendChild(option);
-            }
 
             // Fetch data
             try {
