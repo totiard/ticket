@@ -82,9 +82,9 @@
         /* Toast/Popup Style */
         #toast-popup {
             position: fixed;
-            top: 50%;
+            bottom: 20px;
             left: 50%;
-            transform: translate(-50%, -50%);
+            transform: translateX(-50%);
             transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
             z-index: 100;
         }
@@ -107,12 +107,22 @@
                 
                 <div class="space-y-6">
                     <!-- Route -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="relative autocomplete">
+                    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+                        <!-- Origin -->
+                        <div class="relative autocomplete w-full">
                             <label for="origin" class="block text-sm font-medium text-gray-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-plane-up w-4 text-center"></i>Penerbangan Asal</label>
                             <input type="text" id="origin" placeholder="Contoh: JAKARTA - SOEKARNO HATTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
-                        <div class="relative autocomplete">
+
+                        <!-- Swap Button -->
+                        <div class="mt-2 md:mt-6">
+                            <button id="swapRouteButton" class="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500" title="Tukar Rute">
+                                <i class="fa-solid fa-right-left"></i>
+                            </button>
+                        </div>
+
+                        <!-- Destination -->
+                        <div class="relative autocomplete w-full">
                             <label for="destination" class="block text-sm font-medium text-gray-300 mb-1 flex items-center gap-2"><i class="fa-solid fa-plane-arrival w-4 text-center"></i>Penerbangan Tujuan</label>
                             <input type="text" id="destination" placeholder="Contoh: SINGAPORE - CHANGI (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
@@ -173,7 +183,7 @@
                     <!-- Excel/Spreadsheet Input Area -->
                     <div id="excelInputArea" class="hidden">
                         <label for="excelPaste" class="block text-sm font-medium text-gray-300 mb-2">Paste data dari Excel/Spreadsheet:</label>
-                        <textarea id="excelPaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;ROCHMAT GUMELAR	Sukabumi, 31 Desember 2008&#10;MUHAMMAD FAZRUL ANNAS 	Sukabumi, 06 Mei 2009"></textarea>
+                        <textarea id="excelPaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;ROCHMAT GUMELAR 	Sukabumi, 31 Desember 2008&#10;MUHAMMAD FAZRUL ANNAS 	Sukabumi, 06 Mei 2009"></textarea>
                     </div>
 
                     <!-- Image Text Input Area -->
@@ -227,6 +237,7 @@
         const elements = {
             origin: document.getElementById('origin'),
             destination: document.getElementById('destination'),
+            swapRouteButton: document.getElementById('swapRouteButton'), // Added swap button
             flightDate: document.getElementById('flightDate'),
             airline: document.getElementById('airline'),
             departureTime: document.getElementById('departureTime'),
@@ -252,7 +263,6 @@
 
         // --- STATE ---
         let state = {
-            isLocked: true,
             activeTab: 'manual',
             paxData: []
         };
@@ -282,36 +292,39 @@
 
         // --- CORE LOGIC ---
         function generateOutput() {
-            const originCode = getIataCode(elements.origin.value) || '...';
-            const destinationCode = getIataCode(elements.destination.value) || '...';
-            const dateText = formatDate(elements.flightDate.value);
-            const airlineName = elements.airline.value || 'Nama Maskapai';
-            const depTime = elements.departureTime.value.replace(':', '.') || '00.00';
-            const arrTime = elements.arrivalTime.value.replace(':', '.') || '00.00';
-            const airlineIata = elements.airlineCode.textContent;
-            const flightNum = elements.flightCode.value || 'XXX';
-            const paxNum = elements.paxCount.value || 'X';
+            // Only generate if the output is locked
+            if (elements.output.readOnly) {
+                const originCode = getIataCode(elements.origin.value) || '...';
+                const destinationCode = getIataCode(elements.destination.value) || '...';
+                const dateText = formatDate(elements.flightDate.value);
+                const airlineName = elements.airline.value || 'Nama Maskapai';
+                const depTime = elements.departureTime.value.replace(':', '.') || '00.00';
+                const arrTime = elements.arrivalTime.value.replace(':', '.') || '00.00';
+                const airlineIata = elements.airlineCode.textContent;
+                const flightNum = elements.flightCode.value || 'XXX';
+                const paxNum = elements.paxCount.value || 'X';
 
-            processPaxData();
+                processPaxData();
 
-            let paxDataString = "";
-            if (state.paxData.length > 0) {
-                paxDataString = "\n\nData Pax :\n\n";
-                paxDataString += state.paxData.map((pax, index) => {
-                    const name = (pax.name || 'NAMA PENUMPANG').toUpperCase();
-                    const dob = pax.dob || 'TANGGAL LAHIR';
-                    return `${index + 1}. ${name}\nTanggal lahir : ${dob}`;
-                }).join('\n\n');
+                let paxDataString = "";
+                if (state.paxData.length > 0) {
+                    paxDataString = "\n\nData Pax :\n\n";
+                    paxDataString += state.paxData.map((pax, index) => {
+                        const name = (pax.name || 'NAMA PENUMPANG').toUpperCase();
+                        const dob = pax.dob || 'TANGGAL LAHIR';
+                        return `${index + 1}. ${name}\nTanggal lahir : ${dob}`;
+                    }).join('\n\n');
+                }
+
+                const finalOutput = `${originCode} - ${destinationCode}\n` +
+                                    `${dateText}\n` +
+                                    `${airlineName}\n` +
+                                    `${depTime} - ${arrTime} // ${airlineIata}-${flightNum}\n` +
+                                    `${paxNum} PAX` +
+                                    `${paxDataString}`;
+
+                elements.output.value = finalOutput;
             }
-
-            const finalOutput = `${originCode} - ${destinationCode}\n` +
-                                `${dateText}\n` +
-                                `${airlineName}\n` +
-                                `${depTime} - ${arrTime} // ${airlineIata}-${flightNum}\n` +
-                                `${paxNum} PAX` +
-                                `${paxDataString}`;
-
-            elements.output.value = finalOutput;
         }
 
         function processPaxData() {
@@ -407,7 +420,7 @@
                             <div class="grid grid-cols-3 gap-2">
                                 <input type="number" id="paxDay${i}" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                                 <input type="text" id="paxMonth${i}" list="month-list" placeholder="Bulan" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
-                                <input type="number" id="paxYear${i}" placeholder="Tahun" min="1500" max="2100" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="number" id="paxYear${i}" placeholder="Tahun" min="1900" max="${new Date().getFullYear()}" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                         </div>
                     `;
@@ -512,17 +525,41 @@
 
         elements.paxCount.addEventListener('input', updateManualPaxInputs);
 
+        elements.swapRouteButton.addEventListener('click', () => {
+            const originValue = elements.origin.value;
+            const destinationValue = elements.destination.value;
+
+            elements.origin.value = destinationValue;
+            elements.destination.value = originValue;
+
+            // Trigger the output update after swapping
+            generateOutput();
+        });
+
         elements.lockButton.addEventListener('click', () => {
-            state.isLocked = !state.isLocked;
-            elements.output.readOnly = state.isLocked;
-            elements.lockIcon.classList.toggle('hidden', !state.isLocked);
-            elements.unlockIcon.classList.toggle('hidden', state.isLocked);
-            elements.lockButton.classList.toggle('bg-green-600', !state.isLocked);
-            elements.lockButton.classList.toggle('hover:bg-green-700', !state.isLocked);
-            elements.lockButton.classList.toggle('bg-gray-700', state.isLocked);
-            elements.lockButton.classList.toggle('hover:bg-gray-600', state.isLocked);
-            elements.output.classList.toggle('bg-gray-900', state.isLocked);
-            elements.output.classList.toggle('bg-gray-800', !state.isLocked);
+            // The 'readOnly' property is a boolean. Check it directly.
+            if (elements.output.readOnly) {
+                // UNLOCK
+                elements.output.readOnly = false;
+                elements.lockIcon.classList.add('hidden');
+                elements.unlockIcon.classList.remove('hidden');
+                elements.lockButton.classList.add('bg-green-600', 'hover:bg-green-700');
+                elements.lockButton.classList.remove('bg-gray-700', 'hover:bg-gray-600');
+                elements.output.classList.add('bg-gray-800');
+                elements.output.classList.remove('bg-gray-900');
+                elements.output.focus();
+            } else {
+                // LOCK
+                elements.output.readOnly = true;
+                elements.lockIcon.classList.remove('hidden');
+                elements.unlockIcon.classList.add('hidden');
+                elements.lockButton.classList.remove('bg-green-600', 'hover:bg-green-700');
+                elements.lockButton.classList.add('bg-gray-700', 'hover:bg-gray-600');
+                elements.output.classList.remove('bg-gray-800');
+                elements.output.classList.add('bg-gray-900');
+                // Regenerate output to overwrite any manual changes
+                generateOutput();
+            }
         });
 
         elements.copyButton.addEventListener('click', () => {
@@ -533,14 +570,14 @@
             elements.toastPopup.classList.remove('hidden');
             setTimeout(() => {
                 elements.toastPopup.classList.remove('opacity-0');
-            }, 10); // Small delay to allow transition
+            }, 10);
 
             // Hide toast after 2 seconds
             setTimeout(() => {
                 elements.toastPopup.classList.add('opacity-0');
                 setTimeout(() => {
                     elements.toastPopup.classList.add('hidden');
-                }, 300); // Wait for transition to finish
+                }, 300);
             }, 2000);
         });
 
@@ -577,7 +614,7 @@
             try {
                 const [airlinesRes, airportsRes] = await Promise.all([
                     fetch('maskapai.json'),
-                    fetch('https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv')
+                    fetch('airport-codes.csv')
                 ]);
 
                 if (airlinesRes.ok) {
