@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Ticket Formatter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #4a5568;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #1f2937;
+            border-radius: 0 0 0.5rem 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            color: #d1d5db;
+            border-bottom: 1px solid #374151;
+        }
+        .autocomplete-items div:last-child {
+            border-bottom: none;
+        }
+        .autocomplete-items div:hover {
+            background-color: #374151;
+            color: #ffffff;
+        }
+        .autocomplete-active {
+            background-color: #4f46e5 !important;
+            color: #ffffff;
+        }
+        .tab-button.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+        /* Hide number input spinners */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200 antialiased flex flex-col min-h-screen">
+    <div class="container mx-auto p-4 md:p-8 flex-grow">
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Flight Ticket Formatter</h1>
+            <p class="text-gray-400 mt-2">Buat format tiket penerbangan dengan cepat dan akurat.</p>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Input Section -->
+            <div class="bg-gray-800 p-6 rounded-xl shadow-2xl">
+                <h2 class="text-2xl font-semibold mb-6 border-b border-gray-700 pb-4 text-white">Detail Penerbangan</h2>
+                
+                <div class="space-y-6">
+                    <!-- Route -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="relative autocomplete">
+                            <label for="origin" class="block text-sm font-medium text-gray-300 mb-1">Penerbangan Asal</label>
+                            <input type="text" id="origin" placeholder="Contoh: JAKARTA - SOEKARNO HATTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        </div>
+                        <div class="relative autocomplete">
+                            <label for="destination" class="block text-sm font-medium text-gray-300 mb-1">Penerbangan Tujuan</label>
+                            <input type="text" id="destination" placeholder="Contoh: SINGAPORE - CHANGI (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                        </div>
+                    </div>
+
+                    <!-- Date -->
+                    <div>
+                        <label for="flightDate" class="block text-sm font-medium text-gray-300 mb-1">Tanggal Keberangkatan</label>
+                        <input type="date" id="flightDate" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
+                    </div>
+
+                    <!-- Airline -->
+                    <div class="relative autocomplete">
+                        <label for="airline" class="block text-sm font-medium text-gray-300 mb-1">Maskapai</label>
+                        <input type="text" id="airline" placeholder="Contoh: AirAsia Indonesia" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                    </div>
+
+                    <!-- Flight Time & Code -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label for="departureTime" class="block text-sm font-medium text-gray-300 mb-1">Jam Berangkat</label>
+                            <input type="time" id="departureTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                             <label for="arrivalTime" class="block text-sm font-medium text-gray-300 mb-1">Jam Tiba</label>
+                            <input type="time" id="arrivalTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label for="flightCode" class="block text-sm font-medium text-gray-300 mb-1">Kode Penerbangan</label>
+                            <div class="flex">
+                                <span id="airlineCode" class="inline-flex items-center px-3 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600">--</span>
+                                <input type="text" id="flightCode" placeholder="Contoh: 262" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- PAX -->
+                    <div>
+                        <label for="paxCount" class="block text-sm font-medium text-gray-300 mb-1">Jumlah Penumpang (PAX)</label>
+                        <input type="number" id="paxCount" min="1" placeholder="Contoh: 5" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                    </div>
+                </div>
+
+                <!-- Passenger Data Section -->
+                <div id="paxDataSection" class="mt-8 pt-6 border-t border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Data Penumpang</h3>
+                    <div class="mb-4">
+                        <div class="flex space-x-2 bg-gray-700 p-1 rounded-lg">
+                            <button id="manualTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition active">Manual</button>
+                            <button id="excelTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition">Excel/Spreadsheet</button>
+                            <button id="imageTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition">Image Text</button>
+                        </div>
+                    </div>
+
+                    <!-- Manual Input Area -->
+                    <div id="manualInputArea" class="space-y-4"></div>
+
+                    <!-- Excel/Spreadsheet Input Area -->
+                    <div id="excelInputArea" class="hidden">
+                        <label for="excelPaste" class="block text-sm font-medium text-gray-300 mb-2">Paste data dari Excel/Spreadsheet:</label>
+                        <textarea id="excelPaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;ROCHMAT GUMELAR	Sukabumi, 31 Desember 2008&#10;MUHAMMAD FAZRUL ANNAS 	Sukabumi, 06 Mei 2009"></textarea>
+                    </div>
+
+                    <!-- Image Text Input Area -->
+                    <div id="imageInputArea" class="hidden">
+                         <label for="imagePaste" class="block text-sm font-medium text-gray-300 mb-2">Paste data dari hasil Image-to-Text:</label>
+                        <textarea id="imagePaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;NAMA PENUMPANG 1&#10;NAMA PENUMPANG 2&#10;Kota, 29 November 2008 Kota, 18 Agustus 2008"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="bg-gray-800 p-6 rounded-xl shadow-2xl flex flex-col">
+                <div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-4">
+                    <h2 class="text-2xl font-semibold text-white">Hasil Format</h2>
+                    <div class="flex items-center space-x-3">
+                        <button id="copyButton" class="p-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500" title="Salin Teks">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                        <button id="lockButton" class="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500" title="Kunci/Buka Edit">
+                            <span id="lockIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            </span>
+                             <span id="unlockIcon" class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+                <textarea id="output" readonly class="flex-grow w-full bg-gray-900 text-gray-300 rounded-lg p-4 font-mono text-sm whitespace-pre border border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none custom-scrollbar transition-all duration-300" style="line-height: 1.6;"></textarea>
+                <div id="copy-feedback" class="text-center text-green-400 font-medium h-6 mt-2 transition-opacity duration-300 opacity-0">Teks berhasil disalin!</div>
+            </div>
+        </div>
+    </div>
+    <footer class="text-center p-4 mt-8 bg-gray-800/50">
+        <p class="text-sm text-gray-400">Dibuat oleh <a href="https://totiard.github.io/Profile-New/" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-400 hover:text-indigo-300">Toti Ardianysah</a></p>
+    </footer>
+
+    <!-- Datalists for DOB inputs -->
+    <datalist id="day-list"></datalist>
+    <datalist id="month-list"></datalist>
+    <datalist id="year-list"></datalist>
+
+    <script>
+        // --- DATA ---
+        let airports = [];
+        let airlines = [];
+        
+        // --- CONSTANTS ---
+        const monthIndonesian = ["Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"];
+        const monthEnglishShort = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+
+        // --- DOM ELEMENTS ---
+        const elements = {
+            origin: document.getElementById('origin'),
+            destination: document.getElementById('destination'),
+            flightDate: document.getElementById('flightDate'),
+            airline: document.getElementById('airline'),
+            departureTime: document.getElementById('departureTime'),
+            arrivalTime: document.getElementById('arrivalTime'),
+            airlineCode: document.getElementById('airlineCode'),
+            flightCode: document.getElementById('flightCode'),
+            paxCount: document.getElementById('paxCount'),
+            manualInputArea: document.getElementById('manualInputArea'),
+            excelInputArea: document.getElementById('excelInputArea'),
+            imageInputArea: document.getElementById('imageInputArea'),
+            excelPaste: document.getElementById('excelPaste'),
+            imagePaste: document.getElementById('imagePaste'),
+            manualTab: document.getElementById('manualTab'),
+            excelTab: document.getElementById('excelTab'),
+            imageTab: document.getElementById('imageTab'),
+            output: document.getElementById('output'),
+            copyButton: document.getElementById('copyButton'),
+            lockButton: document.getElementById('lockButton'),
+            lockIcon: document.getElementById('lockIcon'),
+            unlockIcon: document.getElementById('unlockIcon'),
+            copyFeedback: document.getElementById('copy-feedback'),
+        };
+
+        // --- STATE ---
+        let state = {
+            isLocked: true,
+            activeTab: 'manual',
+            paxData: []
+        };
+
+        // --- UTILITY FUNCTIONS ---
+        const formatDate = (dateStr) => {
+            if (!dateStr) return "Tanggal DD Bulan YYYY";
+            const date = new Date(dateStr);
+            const day = date.getUTCDate();
+            const month = monthIndonesian[date.getUTCMonth()];
+            const year = date.getUTCFullYear();
+            return `Tanggal ${day} ${month} ${year}`;
+        };
+
+        const formatDob = (date) => {
+            if (!date || isNaN(date)) return "DDMMM YYYY";
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = monthEnglishShort[date.getMonth()];
+            const year = date.getFullYear();
+            return `${day}${month} ${year}`;
+        };
+        
+        const getIataCode = (value) => {
+            const match = value.match(/\(([^)]+)\)$/);
+            return match ? match[1].trim() : '';
+        };
+
+        // --- CORE LOGIC ---
+        function generateOutput() {
+            const originCode = getIataCode(elements.origin.value) || '...';
+            const destinationCode = getIataCode(elements.destination.value) || '...';
+            const dateText = formatDate(elements.flightDate.value);
+            const airlineName = elements.airline.value || 'Nama Maskapai';
+            const depTime = elements.departureTime.value.replace(':', '.') || '00.00';
+            const arrTime = elements.arrivalTime.value.replace(':', '.') || '00.00';
+            const airlineIata = elements.airlineCode.textContent;
+            const flightNum = elements.flightCode.value || 'XXX';
+            const paxNum = elements.paxCount.value || 'X';
+
+            processPaxData();
+
+            let paxDataString = "";
+            if (state.paxData.length > 0) {
+                paxDataString = "\n\nData Pax :\n\n";
+                paxDataString += state.paxData.map((pax, index) => {
+                    const name = (pax.name || 'NAMA PENUMPANG').toUpperCase();
+                    const dob = pax.dob || 'TANGGAL LAHIR';
+                    return `${index + 1}. ${name}\nTanggal lahir : ${dob}`;
+                }).join('\n\n');
+            }
+
+            const finalOutput = `${originCode} - ${destinationCode}\n` +
+                                `${dateText}\n` +
+                                `${airlineName}\n` +
+                                `${depTime} - ${arrTime} // ${airlineIata}-${flightNum}\n` +
+                                `${paxNum} PAX` +
+                                `${paxDataString}`;
+
+            elements.output.value = finalOutput;
+        }
+
+        function processPaxData() {
+            const paxCount = parseInt(elements.paxCount.value) || 0;
+            state.paxData = [];
+
+            if (state.activeTab === 'manual') {
+                for (let i = 0; i < paxCount; i++) {
+                    const nameInput = document.getElementById(`paxName${i}`);
+                    const dayInput = document.getElementById(`paxDay${i}`);
+                    const monthInput = document.getElementById(`paxMonth${i}`);
+                    const yearInput = document.getElementById(`paxYear${i}`);
+                    
+                    if (nameInput && dayInput && monthInput && yearInput) {
+                        const day = dayInput.value;
+                        const monthValue = monthInput.value;
+                        const year = yearInput.value;
+                        
+                        const monthIndex = monthIndonesian.findIndex(m => m.toLowerCase() === monthValue.toLowerCase());
+                        
+                        let dobDate = null;
+                        if(day && monthIndex > -1 && year) {
+                            dobDate = new Date(year, monthIndex, day);
+                        }
+                        state.paxData.push({
+                            name: nameInput.value,
+                            dob: formatDob(dobDate)
+                        });
+                    }
+                }
+            } else if (state.activeTab === 'excel') {
+                const text = elements.excelPaste.value.trim();
+                if (!text) return;
+                const lines = text.split('\n');
+                state.paxData = lines.map(line => {
+                    const parts = line.split(/\t+/);
+                    const name = parts[0] ? parts[0].trim() : '';
+                    let dob = '';
+                    if (parts[1]) {
+                        const datePart = parts[1].split(',').pop().trim();
+                        const dateMatch = datePart.match(/(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/);
+                        if (dateMatch) {
+                            const day = dateMatch[1];
+                            const monthName = dateMatch[2];
+                            const year = dateMatch[3];
+                            const monthIndex = monthIndonesian.findIndex(m => m.toLowerCase() === monthName.toLowerCase());
+                            if (monthIndex !== -1) {
+                                dob = formatDob(new Date(year, monthIndex, day));
+                            }
+                        }
+                    }
+                    return { name, dob };
+                }).slice(0, paxCount || lines.length);
+            } else if (state.activeTab === 'image') {
+                const text = elements.imagePaste.value.trim();
+                if (!text) return;
+                
+                const dateRegex = /(?:[A-Za-z]+,\s*)?(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})/g;
+                let dates = [];
+                let match;
+                while ((match = dateRegex.exec(text)) !== null) {
+                    const day = match[1];
+                    const monthName = match[2];
+                    const year = match[3];
+                    const monthIndex = monthIndonesian.findIndex(m => m.toLowerCase() === monthName.toLowerCase());
+                    if (monthIndex !== -1) {
+                        dates.push(formatDob(new Date(year, monthIndex, day)));
+                    }
+                }
+
+                const namesText = text.replace(dateRegex, '').replace(/\n\s*\n/g, '\n').trim();
+                const names = namesText.split('\n').map(n => n.trim()).filter(Boolean);
+
+                const count = Math.min(names.length, dates.length, paxCount || Math.min(names.length, dates.length));
+                for(let i=0; i < count; i++) {
+                    state.paxData.push({ name: names[i] || '', dob: dates[i] || '' });
+                }
+            }
+        }
+
+        function updateManualPaxInputs() {
+            const count = parseInt(elements.paxCount.value) || 0;
+            elements.manualInputArea.innerHTML = '';
+            if (count > 0 && count < 50) { // Safety limit
+                let html = '';
+                for (let i = 0; i < count; i++) {
+                    html += `
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <p class="font-semibold text-white mb-3">Penumpang ${i + 1}</p>
+                            <div class="mb-3">
+                                <input type="text" id="paxName${i}" placeholder="Nama Lengkap" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            </div>
+                            <div class="grid grid-cols-3 gap-2">
+                                <input type="number" id="paxDay${i}" list="day-list" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="text" id="paxMonth${i}" list="month-list" placeholder="Bulan" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="number" id="paxYear${i}" list="year-list" placeholder="Tahun" min="1500" max="2100" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                            </div>
+                        </div>
+                    `;
+                }
+                elements.manualInputArea.innerHTML = html;
+                for (let i = 0; i < count; i++) {
+                    document.getElementById(`paxName${i}`).addEventListener('input', generateOutput);
+                    document.getElementById(`paxDay${i}`).addEventListener('input', generateOutput);
+                    document.getElementById(`paxMonth${i}`).addEventListener('input', generateOutput);
+                    document.getElementById(`paxYear${i}`).addEventListener('input', generateOutput);
+                }
+            }
+            generateOutput();
+        }
+
+        function autocomplete(inp, arr) {
+            let currentFocus;
+            const closeAllLists = (elmnt) => {
+                const x = document.getElementsByClassName("autocomplete-items");
+                for (let i = 0; i < x.length; i++) {
+                    if (elmnt != x[i] && elmnt != inp) {
+                        x[i].parentNode.removeChild(x[i]);
+                    }
+                }
+                if (inp.id === 'airline') {
+                    const selectedAirline = airlines.find(a => a.name === inp.value);
+                    elements.airlineCode.textContent = selectedAirline ? selectedAirline.code : '--';
+                }
+                generateOutput();
+            }
+
+            const createList = (filter) => {
+                let a, b, i, val = filter;
+                closeAllLists();
+                currentFocus = -1;
+                a = document.createElement("DIV");
+                a.setAttribute("id", inp.id + "autocomplete-list");
+                a.setAttribute("class", "autocomplete-items custom-scrollbar");
+                inp.parentNode.appendChild(a);
+                for (i = 0; i < arr.length; i++) {
+                    if (!val || arr[i].name.toUpperCase().includes(val.toUpperCase())) {
+                        b = document.createElement("DIV");
+                        if (val) {
+                            const matchIndex = arr[i].name.toUpperCase().indexOf(val.toUpperCase());
+                            b.innerHTML = arr[i].name.substring(0, matchIndex) +
+                                          "<strong>" + arr[i].name.substring(matchIndex, matchIndex + val.length) + "</strong>" +
+                                          arr[i].name.substring(matchIndex + val.length);
+                        } else {
+                            b.innerHTML = arr[i].name;
+                        }
+                        b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
+                        b.addEventListener("click", function(e) {
+                            inp.value = this.getElementsByTagName("input")[0].value;
+                            closeAllLists(this);
+                        });
+                        a.appendChild(b);
+                    }
+                }
+            };
+            
+            inp.addEventListener("input", function() { createList(this.value); });
+            inp.addEventListener("click", function() {
+                if (!document.getElementById(this.id + "autocomplete-list")) {
+                    createList("");
+                }
+            });
+
+            inp.addEventListener("keydown", function(e) {
+                let x = document.getElementById(this.id + "autocomplete-list");
+                if (x) x = x.getElementsByTagName("div");
+                if (e.keyCode == 40) { currentFocus++; addActive(x); } 
+                else if (e.keyCode == 38) { currentFocus--; addActive(x); } 
+                else if (e.keyCode == 13) { e.preventDefault(); if (currentFocus > -1) { if (x) x[currentFocus].click(); } }
+            });
+
+            function addActive(x) {
+                if (!x) return false;
+                removeActive(x);
+                if (currentFocus >= x.length) currentFocus = 0;
+                if (currentFocus < 0) currentFocus = (x.length - 1);
+                x[currentFocus].classList.add("autocomplete-active");
+            }
+
+            function removeActive(x) {
+                for (let i = 0; i < x.length; i++) {
+                    x[i].classList.remove("autocomplete-active");
+                }
+            }
+            
+            document.addEventListener("click", function (e) { closeAllLists(e.target); });
+        }
+        
+        // --- EVENT LISTENERS ---
+        Object.values(elements).forEach(el => {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                if(el.id !== 'origin' && el.id !== 'destination' && el.id !== 'airline') {
+                   el.addEventListener('input', generateOutput);
+                   el.addEventListener('change', generateOutput);
+                }
+            }
+        });
+
+        elements.paxCount.addEventListener('input', updateManualPaxInputs);
+
+        elements.lockButton.addEventListener('click', () => {
+            state.isLocked = !state.isLocked;
+            elements.output.readOnly = state.isLocked;
+            elements.lockIcon.classList.toggle('hidden', !state.isLocked);
+            elements.unlockIcon.classList.toggle('hidden', state.isLocked);
+            elements.lockButton.classList.toggle('bg-green-600', !state.isLocked);
+            elements.lockButton.classList.toggle('hover:bg-green-700', !state.isLocked);
+            elements.lockButton.classList.toggle('bg-gray-700', state.isLocked);
+            elements.lockButton.classList.toggle('hover:bg-gray-600', state.isLocked);
+            elements.output.classList.toggle('bg-gray-900', state.isLocked);
+            elements.output.classList.toggle('bg-gray-800', !state.isLocked);
+        });
+
+        elements.copyButton.addEventListener('click', () => {
+            elements.output.select();
+            document.execCommand('copy');
+            elements.copyFeedback.classList.remove('opacity-0');
+            setTimeout(() => { elements.copyFeedback.classList.add('opacity-0'); }, 2000);
+        });
+
+        function switchTab(tabName) {
+            state.activeTab = tabName;
+            elements.manualInputArea.classList.toggle('hidden', tabName !== 'manual');
+            elements.excelInputArea.classList.toggle('hidden', tabName !== 'excel');
+            elements.imageInputArea.classList.toggle('hidden', tabName !== 'image');
+            elements.manualTab.classList.toggle('active', tabName === 'manual');
+            elements.excelTab.classList.toggle('active', tabName === 'excel');
+            elements.imageTab.classList.toggle('active', tabName === 'image');
+            generateOutput();
+        }
+
+        elements.manualTab.addEventListener('click', () => switchTab('manual'));
+        elements.excelTab.addEventListener('click', () => switchTab('excel'));
+        elements.imageTab.addEventListener('click', () => switchTab('image'));
+
+        // --- DATA FETCHING & INITIALIZATION ---
+        async function initialize() {
+            // Set default date
+            const today = new Date();
+            elements.flightDate.valueAsDate = today;
+
+            // Populate DOB datalists
+            const dayDatalist = document.getElementById('day-list');
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                dayDatalist.appendChild(option);
+            }
+
+            const monthDatalist = document.getElementById('month-list');
+            monthIndonesian.forEach(month => {
+                const option = document.createElement('option');
+                option.value = month;
+                monthDatalist.appendChild(option);
+            });
+
+            const yearDatalist = document.getElementById('year-list');
+            for (let i = 2100; i >= 1500; i--) {
+                const option = document.createElement('option');
+                option.value = i;
+                yearDatalist.appendChild(option);
+            }
+
+            // Fetch data
+            try {
+                const [airlinesRes, airportsRes] = await Promise.all([
+                    fetch('https://raw.githubusercontent.com/totiard/ticket/main/maskapai.json'),
+                    fetch('https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv')
+                ]);
+
+                if (airlinesRes.ok) {
+                    const airlinesData = await airlinesRes.json();
+                    airlines = airlinesData.map(item => ({ name: item.Airline, code: item.Kode })).sort((a, b) => a.name.localeCompare(b.name));
+                } else {
+                    console.error('Failed to fetch airlines');
+                }
+
+                if (airportsRes.ok) {
+                    const airportsCSV = await airportsRes.text();
+                    const lines = airportsCSV.split('\n').slice(1); // Skip header
+                    airports = lines.map(line => {
+                        const columns = line.split(',');
+                        // ident,type,name,elevation_ft,continent,iso_country,iso_region,municipality,gps_code,iata_code,local_code,coordinates
+                        const iata = columns[9]?.replace(/"/g, '');
+                        const name = columns[2]?.replace(/"/g, '');
+                        const city = columns[7]?.replace(/"/g, '');
+                        const type = columns[1]?.replace(/"/g, '');
+                        if (iata && (type.includes('airport')) && !type.includes('closed')) {
+                            return { name: `${city ? city.toUpperCase() : 'N/A'} - ${name.toUpperCase()} (${iata})`, code: iata };
+                        }
+                        return null;
+                    }).filter(Boolean).sort((a,b) => a.name.localeCompare(b.name));
+                } else {
+                     console.error('Failed to fetch airports');
+                }
+
+            } catch (error) {
+                console.error("Error fetching data:", error);
+            }
+
+            // Setup autocomplete
+            autocomplete(elements.origin, airports);
+            autocomplete(elements.destination, airports);
+            autocomplete(elements.airline, airlines);
+            
+            // Initial render
+            generateOutput();
+        }
+
+        window.onload = initialize;
+
+    </script>
+</body>
+</html>
