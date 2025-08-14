@@ -1,0 +1,1882 @@
+[
+  {
+    "Kode": "LH",
+    "Airline": "Lufthansa"
+  },
+  {
+    "Kode": "KL",
+    "Airline": "KLM"
+  },
+  {
+    "Kode": "BA",
+    "Airline": "British Airways"
+  },
+  {
+    "Kode": "LX",
+    "Airline": "SWISS"
+  },
+  {
+    "Kode": "DL",
+    "Airline": "Delta"
+  },
+  {
+    "Kode": "TK",
+    "Airline": "Turkish Airlines"
+  },
+  {
+    "Kode": "IB",
+    "Airline": "Iberia"
+  },
+  {
+    "Kode": "UA",
+    "Airline": "United Airlines"
+  },
+  {
+    "Kode": "AF",
+    "Airline": "Air France"
+  },
+  {
+    "Kode": "OS",
+    "Airline": "Austrian Airlines"
+  },
+  {
+    "Kode": "EK",
+    "Airline": "Emirates"
+  },
+  {
+    "Kode": "QR",
+    "Airline": "Qatar Airways"
+  },
+  {
+    "Kode": "AC",
+    "Airline": "Air Canada"
+  },
+  {
+    "Kode": "SK",
+    "Airline": "Scandinavian Airlines"
+  },
+  {
+    "Kode": "LO",
+    "Airline": "LOT"
+  },
+  {
+    "Kode": "SN",
+    "Airline": "Brussels Airlines"
+  },
+  {
+    "Kode": "EY",
+    "Airline": "Etihad Airways"
+  },
+  {
+    "Kode": "AY",
+    "Airline": "Finnair"
+  },
+  {
+    "Kode": "AS",
+    "Airline": "Alaska Airlines"
+  },
+  {
+    "Kode": "TP",
+    "Airline": "TAP AIR PORTUGAL"
+  },
+  {
+    "Kode": "SQ",
+    "Airline": "Singapore Airlines"
+  },
+  {
+    "Kode": "CX",
+    "Airline": "Cathay Pacific"
+  },
+  {
+    "Kode": "ET",
+    "Airline": "Ethiopian Air"
+  },
+  {
+    "Kode": "FR",
+    "Airline": "Ryanair"
+  },
+  {
+    "Kode": "AZ",
+    "Airline": "ITA Airways"
+  },
+  {
+    "Kode": "B6",
+    "Airline": "JetBlue"
+  },
+  {
+    "Kode": "MH",
+    "Airline": "Malaysia Airlines"
+  },
+  {
+    "Kode": "MS",
+    "Airline": "Egyptair"
+  },
+  {
+    "Kode": "NK",
+    "Airline": "Spirit Airlines"
+  },
+  {
+    "Kode": "EI",
+    "Airline": "Aer Lingus"
+  },
+  {
+    "Kode": "F9",
+    "Airline": "Frontier"
+  },
+  {
+    "Kode": "MU",
+    "Airline": "China Eastern"
+  },
+  {
+    "Kode": "AV",
+    "Airline": "Avianca"
+  },
+  {
+    "Kode": "NH",
+    "Airline": "ANA"
+  },
+  {
+    "Kode": "U2",
+    "Airline": "easyJet"
+  },
+  {
+    "Kode": "JL",
+    "Airline": "JAL"
+  },
+  {
+    "Kode": "LA",
+    "Airline": "LATAM Airlines"
+  },
+  {
+    "Kode": "KE",
+    "Airline": "Korean Air"
+  },
+  {
+    "Kode": "UX",
+    "Airline": "Air Europa"
+  },
+  {
+    "Kode": "TG",
+    "Airline": "Thai Airways"
+  },
+  {
+    "Kode": "CA",
+    "Airline": "Air China"
+  },
+  {
+    "Kode": "CZ",
+    "Airline": "China Southern"
+  },
+  {
+    "Kode": "AI",
+    "Airline": "Air India"
+  },
+  {
+    "Kode": "PC",
+    "Airline": "Pegasus Airlines"
+  },
+  {
+    "Kode": "EW",
+    "Airline": "Eurowings"
+  },
+  {
+    "Kode": "HA",
+    "Airline": "Hawaiian Airlines"
+  },
+  {
+    "Kode": "DY",
+    "Airline": "Norwegian"
+  },
+  {
+    "Kode": "AM",
+    "Airline": "Aeromexico"
+  },
+  {
+    "Kode": "OZ",
+    "Airline": "Asiana Airlines"
+  },
+  {
+    "Kode": "AT",
+    "Airline": "Royal Air Maroc"
+  },
+  {
+    "Kode": "CM",
+    "Airline": "Copa Airlines"
+  },
+  {
+    "Kode": "JU",
+    "Airline": "Air Serbia"
+  },
+  {
+    "Kode": "CI",
+    "Airline": "China Airlines"
+  },
+  {
+    "Kode": "BR",
+    "Airline": "EVA Air"
+  },
+  {
+    "Kode": "SV",
+    "Airline": "SAUDIA"
+  },
+  {
+    "Kode": "G3",
+    "Airline": "GOL"
+  },
+  {
+    "Kode": "PR",
+    "Airline": "Philippine Airlines"
+  },
+  {
+    "Kode": "QF",
+    "Airline": "Qantas Airways"
+  },
+  {
+    "Kode": "BT",
+    "Airline": "airBaltic"
+  },
+  {
+    "Kode": "TO",
+    "Airline": "Transavia France"
+  },
+  {
+    "Kode": "FI",
+    "Airline": "Icelandair"
+  },
+  {
+    "Kode": "GF",
+    "Airline": "Gulf Air"
+  },
+  {
+    "Kode": "VN",
+    "Airline": "Vietnam Airlines"
+  },
+  {
+    "Kode": "DE",
+    "Airline": "Condor"
+  },
+  {
+    "Kode": "VY",
+    "Airline": "Vueling"
+  },
+  {
+    "Kode": "MF",
+    "Airline": "XiamenAir"
+  },
+  {
+    "Kode": "VS",
+    "Airline": "Virgin Atlantic"
+  },
+  {
+    "Kode": "KU",
+    "Airline": "Kuwait Airways"
+  },
+  {
+    "Kode": "GA",
+    "Airline": "Garuda Indonesia"
+  },
+  {
+    "Kode": "KQ",
+    "Airline": "Kenya Airways"
+  },
+  {
+    "Kode": "OD",
+    "Airline": "Batik Air"
+  },
+  {
+    "Kode": "TR",
+    "Airline": "Scoot"
+  },
+  {
+    "Kode": "RJ",
+    "Airline": "Royal Jordanian"
+  },
+  {
+    "Kode": "UL",
+    "Airline": "SriLankan Airlines"
+  },
+  {
+    "Kode": "VF",
+    "Airline": "Ajet"
+  },
+  {
+    "Kode": "SY",
+    "Airline": "Sun Country Air"
+  },
+  {
+    "Kode": "TS",
+    "Airline": "Air Transat"
+  },
+  {
+    "Kode": "VJ",
+    "Airline": "VietJet Air"
+  },
+  {
+    "Kode": "A3",
+    "Airline": "Aegean Airlines"
+  },
+  {
+    "Kode": "JA",
+    "Airline": "JetSMART"
+  },
+  {
+    "Kode": "RO",
+    "Airline": "TAROM"
+  },
+  {
+    "Kode": "FZ",
+    "Airline": "flydubai"
+  },
+  {
+    "Kode": "LG",
+    "Airline": "Luxair"
+  },
+  {
+    "Kode": "AA",
+    "Airline": "American Airlines"
+  },
+  {
+    "Kode": "AR",
+    "Airline": "Aerolineas Argentinas"
+  },
+  {
+    "Kode": "NZ",
+    "Airline": "Air New Zealand"
+  },
+  {
+    "Kode": "WS",
+    "Airline": "WestJet"
+  },
+  {
+    "Kode": "G9",
+    "Airline": "Air Arabia"
+  },
+  {
+    "Kode": "MX",
+    "Airline": "Breeze Airways"
+  },
+  {
+    "Kode": "PD",
+    "Airline": "Porter Airlines"
+  },
+  {
+    "Kode": "W4",
+    "Airline": "Wizz Air"
+  },
+  {
+    "Kode": "AH",
+    "Airline": "Air Algerie"
+  },
+  {
+    "Kode": "GQ",
+    "Airline": "Sky Express"
+  },
+  {
+    "Kode": "HO",
+    "Airline": "Juneyao Airlines"
+  },
+  {
+    "Kode": "JX",
+    "Airline": "STARLUX Airlines"
+  },
+  {
+    "Kode": "LY",
+    "Airline": "EL AL"
+  },
+  {
+    "Kode": "OU",
+    "Airline": "Croatia Airlines"
+  },
+  {
+    "Kode": "TU",
+    "Airline": "Tunisair"
+  },
+  {
+    "Kode": "AD",
+    "Airline": "Azul"
+  },
+  {
+    "Kode": "HU",
+    "Airline": "Hainan Airlines"
+  },
+  {
+    "Kode": "QS",
+    "Airline": "Smartwings"
+  },
+  {
+    "Kode": "KM",
+    "Airline": "KM Malta Airlines"
+  },
+  {
+    "Kode": "LL",
+    "Airline": "LEVEL"
+  },
+  {
+    "Kode": "S4",
+    "Airline": "Azores Airlines"
+  },
+  {
+    "Kode": "TW",
+    "Airline": "T'way Air"
+  },
+  {
+    "Kode": "VB",
+    "Airline": "Viva"
+  },
+  {
+    "Kode": "AK",
+    "Airline": "AirAsia"
+  },
+  {
+    "Kode": "EC",
+    "Airline": "easyJet"
+  },
+  {
+    "Kode": "HV",
+    "Airline": "Transavia"
+  },
+  {
+    "Kode": "JQ",
+    "Airline": "Jetstar"
+  },
+  {
+    "Kode": "V7",
+    "Airline": "Volotea"
+  },
+  {
+    "Kode": "WY",
+    "Airline": "Oman Air"
+  },
+  {
+    "Kode": "FD",
+    "Airline": "Thai AirAsia"
+  },
+  {
+    "Kode": "FM",
+    "Airline": "Shanghai Airlines"
+  },
+  {
+    "Kode": "G4",
+    "Airline": "Allegiant Air"
+  },
+  {
+    "Kode": "HX",
+    "Airline": "Hong Kong Airlines"
+  },
+  {
+    "Kode": "IX",
+    "Airline": "Air India Express"
+  },
+  {
+    "Kode": "UO",
+    "Airline": "HK Express"
+  },
+  {
+    "Kode": "7C",
+    "Airline": "Jeju Air"
+  },
+  {
+    "Kode": "BJ",
+    "Airline": "Nouvelair"
+  },
+  {
+    "Kode": "FA",
+    "Airline": "FlySafair"
+  },
+  {
+    "Kode": "FJ",
+    "Airline": "Fiji Airways"
+  },
+  {
+    "Kode": "HY",
+    "Airline": "Uzbekistan Airways"
+  },
+  {
+    "Kode": "LS",
+    "Airline": "Jet2"
+  },
+  {
+    "Kode": "NX",
+    "Airline": "Air Macau"
+  },
+  {
+    "Kode": "SA",
+    "Airline": "South African"
+  },
+  {
+    "Kode": "SL",
+    "Airline": "Thai Lion Air"
+  },
+  {
+    "Kode": "VA",
+    "Airline": "Virgin Australia"
+  },
+  {
+    "Kode": "WN",
+    "Airline": "Southwest"
+  },
+  {
+    "Kode": "BI",
+    "Airline": "Royal Brunei Airlines"
+  },
+  {
+    "Kode": "D7",
+    "Airline": "AirAsia X"
+  },
+  {
+    "Kode": "EN",
+    "Airline": "Air Dolomiti"
+  },
+  {
+    "Kode": "H2",
+    "Airline": "Sky Airline"
+  },
+  {
+    "Kode": "ID",
+    "Airline": "Batik Air"
+  },
+  {
+    "Kode": "J2",
+    "Airline": "Azerbaijan Airlines"
+  },
+  {
+    "Kode": "KC",
+    "Airline": "Air Astana"
+  },
+  {
+    "Kode": "LJ",
+    "Airline": "Jin Air"
+  },
+  {
+    "Kode": "ME",
+    "Airline": "MEA"
+  },
+  {
+    "Kode": "MK",
+    "Airline": "Air Mauritius"
+  },
+  {
+    "Kode": "PG",
+    "Airline": "Bangkok Airways"
+  },
+  {
+    "Kode": "TN",
+    "Airline": "Air Tahiti Nui"
+  },
+  {
+    "Kode": "5Z",
+    "Airline": "Cemair"
+  },
+  {
+    "Kode": "BF",
+    "Airline": "French Bee"
+  },
+  {
+    "Kode": "BG",
+    "Airline": "Biman Bangladesh"
+  },
+  {
+    "Kode": "DM",
+    "Airline": "Arajet"
+  },
+  {
+    "Kode": "F8",
+    "Airline": "Flair Airlines"
+  },
+  {
+    "Kode": "FY",
+    "Airline": "Firefly"
+  },
+  {
+    "Kode": "I2",
+    "Airline": "Iberia Express"
+  },
+  {
+    "Kode": "J9",
+    "Airline": "Jazeera Airways"
+  },
+  {
+    "Kode": "IZ",
+    "Airline": "Arkia"
+  },
+  {
+    "Kode": "OV",
+    "Airline": "Salam Air"
+  },
+  {
+    "Kode": "PK",
+    "Airline": "Pakistan International Airlines"
+  },
+  {
+    "Kode": "SM",
+    "Airline": "Air Cairo"
+  },
+  {
+    "Kode": "TX",
+    "Airline": "Air Caraïbes"
+  },
+  {
+    "Kode": "W6",
+    "Airline": "Wizz Air"
+  },
+  {
+    "Kode": "BW",
+    "Airline": "Caribbean Airlines"
+  },
+  {
+    "Kode": "BX",
+    "Airline": "Air Busan"
+  },
+  {
+    "Kode": "FB",
+    "Airline": "Bulgaria Air"
+  },
+  {
+    "Kode": "GK",
+    "Airline": "Jetstar Japan"
+  },
+  {
+    "Kode": "HC",
+    "Airline": "Air Senegal"
+  },
+  {
+    "Kode": "MM",
+    "Airline": "Peach"
+  },
+  {
+    "Kode": "N0",
+    "Airline": "Norse Atlantic Airways"
+  },
+  {
+    "Kode": "NT",
+    "Airline": "Binter Canarias"
+  },
+  {
+    "Kode": "OB",
+    "Airline": "BoA"
+  },
+  {
+    "Kode": "OM",
+    "Airline": "MIAT Mongolian"
+  },
+  {
+    "Kode": "P5",
+    "Airline": "Wingo"
+  },
+  {
+    "Kode": "Q6",
+    "Airline": "Volaris Costa Rica"
+  },
+  {
+    "Kode": "QZ",
+    "Airline": "Indonesia AirAsia"
+  },
+  {
+    "Kode": "SC",
+    "Airline": "Shandong Airlines"
+  },
+  {
+    "Kode": "SG",
+    "Airline": "SpiceJet"
+  },
+  {
+    "Kode": "SS",
+    "Airline": "Corsair"
+  },
+  {
+    "Kode": "TB",
+    "Airline": "TUI Fly Belgium"
+  },
+  {
+    "Kode": "5J",
+    "Airline": "Cebu Pacific"
+  },
+  {
+    "Kode": "VZ",
+    "Airline": "Thai Vietjet Air"
+  },
+  {
+    "Kode": "6E",
+    "Airline": "IndiGo"
+  },
+  {
+    "Kode": "7T",
+    "Airline": "Trenitalia"
+  },
+  {
+    "Kode": "8M",
+    "Airline": "MAI"
+  },
+  {
+    "Kode": "9B",
+    "Airline": "AccesRail"
+  },
+  {
+    "Kode": "A9",
+    "Airline": "Georgian Airways"
+  },
+  {
+    "Kode": "B0",
+    "Airline": "La Compagnie"
+  },
+  {
+    "Kode": "BP",
+    "Airline": "Air Botswana"
+  },
+  {
+    "Kode": "BS",
+    "Airline": "US-Bangla Airlines"
+  },
+  {
+    "Kode": "BY",
+    "Airline": "TUI Airways"
+  },
+  {
+    "Kode": "BZ",
+    "Airline": "BlueBird Airways"
+  },
+  {
+    "Kode": "CY",
+    "Airline": "Cyprus Airways"
+  },
+  {
+    "Kode": "DD",
+    "Airline": "Nok Air"
+  },
+  {
+    "Kode": "DG",
+    "Airline": "Cebgo"
+  },
+  {
+    "Kode": "DS",
+    "Airline": "easyJet"
+  },
+  {
+    "Kode": "DT",
+    "Airline": "TAAG"
+  },
+  {
+    "Kode": "E9",
+    "Airline": "Iberojet"
+  },
+  {
+    "Kode": "F3",
+    "Airline": "flyadeal"
+  },
+  {
+    "Kode": "FH",
+    "Airline": "Freebird"
+  },
+  {
+    "Kode": "FN",
+    "Airline": "fastjet"
+  },
+  {
+    "Kode": "FO",
+    "Airline": "Flybondi"
+  },
+  {
+    "Kode": "IT",
+    "Airline": "Tigerair Taiwan"
+  },
+  {
+    "Kode": "JT",
+    "Airline": "Lion Air"
+  },
+  {
+    "Kode": "K6",
+    "Airline": "Cambodia Angkor Air"
+  },
+  {
+    "Kode": "KP",
+    "Airline": "ASKY"
+  },
+  {
+    "Kode": "LM",
+    "Airline": "Loganair"
+  },
+  {
+    "Kode": "NO",
+    "Airline": "Neos Air"
+  },
+  {
+    "Kode": "NP",
+    "Airline": "Nile Air"
+  },
+  {
+    "Kode": "NQ",
+    "Airline": "Air Japan"
+  },
+  {
+    "Kode": "OG",
+    "Airline": "PLAY"
+  },
+  {
+    "Kode": "P4",
+    "Airline": "Air Peace"
+  },
+  {
+    "Kode": "PU",
+    "Airline": "Plus Ultra"
+  },
+  {
+    "Kode": "QG",
+    "Airline": "Citilink"
+  },
+  {
+    "Kode": "QV",
+    "Airline": "Lao Airlines"
+  },
+  {
+    "Kode": "QW",
+    "Airline": "Qingdao Airlines"
+  },
+  {
+    "Kode": "RS",
+    "Airline": "Air Seoul"
+  },
+  {
+    "Kode": "TC",
+    "Airline": "Air Tanzania"
+  },
+  {
+    "Kode": "U8",
+    "Airline": "TUS Airways"
+  },
+  {
+    "Kode": "4R",
+    "Airline": "Renfe"
+  },
+  {
+    "Kode": "VL",
+    "Airline": "Lufthansa City Airlines"
+  },
+  {
+    "Kode": "W9",
+    "Airline": "Wizz Air"
+  },
+  {
+    "Kode": "WB",
+    "Airline": "RwandAir"
+  },
+  {
+    "Kode": "XC",
+    "Airline": "Corendon Airlines"
+  },
+  {
+    "Kode": "XJ",
+    "Airline": "Thai AirAsia X"
+  },
+  {
+    "Kode": "8D",
+    "Airline": "FitsAir"
+  },
+  {
+    "Kode": "YP",
+    "Airline": "AIR PREMIA"
+  },
+  {
+    "Kode": "Z2",
+    "Airline": "Philippines AirAsia"
+  },
+  {
+    "Kode": "9C",
+    "Airline": "Spring Airlines"
+  },
+  {
+    "Kode": "ZE",
+    "Airline": "Eastar Jet"
+  },
+  {
+    "Kode": "ZG",
+    "Airline": "ZIPAIR"
+  },
+  {
+    "Kode": "A0",
+    "Airline": "BA Euroflyer"
+  },
+  {
+    "Kode": "A2",
+    "Airline": "Animawings"
+  },
+  {
+    "Kode": "A5",
+    "Airline": "HOP!"
+  },
+  {
+    "Kode": "AE",
+    "Airline": "Mandarin Airlines"
+  },
+  {
+    "Kode": "AN",
+    "Airline": "Advanced Air"
+  },
+  {
+    "Kode": "AP",
+    "Airline": "Albastar"
+  },
+  {
+    "Kode": "AQ",
+    "Airline": "9 Air"
+  },
+  {
+    "Kode": "B3",
+    "Airline": "Bhutan Airlines"
+  },
+  {
+    "Kode": "B4",
+    "Airline": "BeOnd"
+  },
+  {
+    "Kode": "B7",
+    "Airline": "UNI AIR"
+  },
+  {
+    "Kode": "AW",
+    "Airline": "AWA"
+  },
+  {
+    "Kode": "BC",
+    "Airline": "Skymark Airlines"
+  },
+  {
+    "Kode": "BK",
+    "Airline": "Okay Airways"
+  },
+  {
+    "Kode": "BL",
+    "Airline": "Pacific Airlines"
+  },
+  {
+    "Kode": "C3",
+    "Airline": "Trade Air"
+  },
+  {
+    "Kode": "BV",
+    "Airline": "TOKI AIR"
+  },
+  {
+    "Kode": "CC",
+    "Airline": "CM Airlines"
+  },
+  {
+    "Kode": "CD",
+    "Airline": "Corendon Dutch Airlines"
+  },
+  {
+    "Kode": "CE",
+    "Airline": "Chalair Aviation"
+  },
+  {
+    "Kode": "CJ",
+    "Airline": "BA CityFlyer"
+  },
+  {
+    "Kode": "CL",
+    "Airline": "Lufthansa CityLine"
+  },
+  {
+    "Kode": "CN",
+    "Airline": "Grand China Air"
+  },
+  {
+    "Kode": "CQ",
+    "Airline": "Coastal"
+  },
+  {
+    "Kode": "D3",
+    "Airline": "Daallo Airlines"
+  },
+  {
+    "Kode": "CS",
+    "Airline": "Chair Airlines"
+  },
+  {
+    "Kode": "DI",
+    "Airline": "Marabu"
+  },
+  {
+    "Kode": "DK",
+    "Airline": "Sunclass Airlines"
+  },
+  {
+    "Kode": "DO",
+    "Airline": "Sky High"
+  },
+  {
+    "Kode": "E2",
+    "Airline": "airHaifa"
+  },
+  {
+    "Kode": "DR",
+    "Airline": "Ruili Airlines"
+  },
+  {
+    "Kode": "E4",
+    "Airline": "Enter Air"
+  },
+  {
+    "Kode": "E5",
+    "Airline": "Air Arabia"
+  },
+  {
+    "Kode": "DV",
+    "Airline": "SCAT Airlines"
+  },
+  {
+    "Kode": "DW",
+    "Airline": "Great Dane Airlines"
+  },
+  {
+    "Kode": "DX",
+    "Airline": "DAT"
+  },
+  {
+    "Kode": "DZ",
+    "Airline": "Donghai Airlines"
+  },
+  {
+    "Kode": "EA",
+    "Airline": "Emerald Airlines"
+  },
+  {
+    "Kode": "EH",
+    "Airline": "ANA"
+  },
+  {
+    "Kode": "ES",
+    "Airline": "Aerolíneas Estelar Latinoamérica"
+  },
+  {
+    "Kode": "EU",
+    "Airline": "Chengdu Airlines"
+  },
+  {
+    "Kode": "EZ",
+    "Airline": "SUN-AIR"
+  },
+  {
+    "Kode": "FC",
+    "Airline": "Link Airways"
+  },
+  {
+    "Kode": "FT",
+    "Airline": "FlyEgypt"
+  },
+  {
+    "Kode": "G5",
+    "Airline": "China Express Airlines"
+  },
+  {
+    "Kode": "FU",
+    "Airline": "Fuzhou Airlines"
+  },
+  {
+    "Kode": "FW",
+    "Airline": "IBEX Airlines"
+  },
+  {
+    "Kode": "GJ",
+    "Airline": "Loong Air"
+  },
+  {
+    "Kode": "GL",
+    "Airline": "Air Greenland"
+  },
+  {
+    "Kode": "GM",
+    "Airline": "Chair"
+  },
+  {
+    "Kode": "GP",
+    "Airline": "APG Airlines"
+  },
+  {
+    "Kode": "GR",
+    "Airline": "Aurigny Air"
+  },
+  {
+    "Kode": "GS",
+    "Airline": "Tianjin Airlines"
+  },
+  {
+    "Kode": "H6",
+    "Airline": "European Air Charter"
+  },
+  {
+    "Kode": "H7",
+    "Airline": "HiSky"
+  },
+  {
+    "Kode": "H8",
+    "Airline": "Sky Airlines Peru"
+  },
+  {
+    "Kode": "GX",
+    "Airline": "GX Airlines"
+  },
+  {
+    "Kode": "H9",
+    "Airline": "Himalaya Airlines"
+  },
+  {
+    "Kode": "GY",
+    "Airline": "Colorful Guizhou Airlines"
+  },
+  {
+    "Kode": "HD",
+    "Airline": "Air Do"
+  },
+  {
+    "Kode": "HF",
+    "Airline": "Air Côte d’Ivoire"
+  },
+  {
+    "Kode": "HH",
+    "Airline": "Qanot Sharq"
+  },
+  {
+    "Kode": "HM",
+    "Airline": "Air Seychelles"
+  },
+  {
+    "Kode": "HP",
+    "Airline": "Amapola Flyg"
+  },
+  {
+    "Kode": "HS",
+    "Airline": "Heli Securite"
+  },
+  {
+    "Kode": "I5",
+    "Airline": "Air India Express"
+  },
+  {
+    "Kode": "IA",
+    "Airline": "Iraqi Airways"
+  },
+  {
+    "Kode": "IC",
+    "Airline": "Air India"
+  },
+  {
+    "Kode": "IE",
+    "Airline": "Solomon Airlines"
+  },
+  {
+    "Kode": "IJ",
+    "Airline": "SPRING JAPAN"
+  },
+  {
+    "Kode": "IN",
+    "Airline": "NAM Air"
+  },
+  {
+    "Kode": "IQ",
+    "Airline": "Qazaq Air"
+  },
+  {
+    "Kode": "IS",
+    "Airline": "Sepehran Airlines"
+  },
+  {
+    "Kode": "J4",
+    "Airline": "Badr Airlines"
+  },
+  {
+    "Kode": "J5",
+    "Airline": "Alaska Seaplanes"
+  },
+  {
+    "Kode": "J7",
+    "Airline": "Afrijet"
+  },
+  {
+    "Kode": "IV",
+    "Airline": "GP Aviation"
+  },
+  {
+    "Kode": "IW",
+    "Airline": "Wings Air"
+  },
+  {
+    "Kode": "JD",
+    "Airline": "Beijing Capital Airlines"
+  },
+  {
+    "Kode": "JH",
+    "Airline": "Fuji Dream Airlines"
+  },
+  {
+    "Kode": "JM",
+    "Airline": "Jambojet"
+  },
+  {
+    "Kode": "K4",
+    "Airline": "ALS"
+  },
+  {
+    "Kode": "K7",
+    "Airline": "Air KBZ"
+  },
+  {
+    "Kode": "JV",
+    "Airline": "Bearskin Airlines"
+  },
+  {
+    "Kode": "JY",
+    "Airline": "interCaribbean Airways"
+  },
+  {
+    "Kode": "JZ",
+    "Airline": "JetSMART Peru"
+  },
+  {
+    "Kode": "KB",
+    "Airline": "Drukair"
+  },
+  {
+    "Kode": "KK",
+    "Airline": "LEAV Aviation"
+  },
+  {
+    "Kode": "KN",
+    "Airline": "China United Airlines"
+  },
+  {
+    "Kode": "KR",
+    "Airline": "Cambodia Airways"
+  },
+  {
+    "Kode": "L6",
+    "Airline": "Mauritania Airlines"
+  },
+  {
+    "Kode": "KW",
+    "Airline": "Kenai Aviation"
+  },
+  {
+    "Kode": "L9",
+    "Airline": "Lumiwings"
+  },
+  {
+    "Kode": "KX",
+    "Airline": "Cayman Airways"
+  },
+  {
+    "Kode": "KY",
+    "Airline": "Kunming Airlines"
+  },
+  {
+    "Kode": "LF",
+    "Airline": "Contour"
+  },
+  {
+    "Kode": "LN",
+    "Airline": "Libyan Airlines"
+  },
+  {
+    "Kode": "LR",
+    "Airline": "Avianca Costa Rica"
+  },
+  {
+    "Kode": "MD",
+    "Airline": "Air Madagascar"
+  },
+  {
+    "Kode": "MI",
+    "Airline": "Freebird Airlines Europe"
+  },
+  {
+    "Kode": "MN",
+    "Airline": "Kulula"
+  },
+  {
+    "Kode": "MO",
+    "Airline": "Calm Air"
+  },
+  {
+    "Kode": "MR",
+    "Airline": "Hunnu Air"
+  },
+  {
+    "Kode": "MT",
+    "Airline": "Malta MedAir"
+  },
+  {
+    "Kode": "N7",
+    "Airline": "Norra"
+  },
+  {
+    "Kode": "MV",
+    "Airline": "Air Mediterranean"
+  },
+  {
+    "Kode": "N9",
+    "Airline": "Shree Airlines"
+  },
+  {
+    "Kode": "MZ",
+    "Airline": "Amakusa Airlines"
+  },
+  {
+    "Kode": "NE",
+    "Airline": "Nesma Airlines"
+  },
+  {
+    "Kode": "NI",
+    "Airline": "Portugalia"
+  },
+  {
+    "Kode": "NM",
+    "Airline": "Air Moana"
+  },
+  {
+    "Kode": "NS",
+    "Airline": "Hebei Airlines"
+  },
+  {
+    "Kode": "NU",
+    "Airline": "Japan Transocean Air"
+  },
+  {
+    "Kode": "OA",
+    "Airline": "Olympic Air"
+  },
+  {
+    "Kode": "OC",
+    "Airline": "Oriental Air Bridge"
+  },
+  {
+    "Kode": "OE",
+    "Airline": "FLYONE Romania"
+  },
+  {
+    "Kode": "ON",
+    "Airline": "Nauru Airlines"
+  },
+  {
+    "Kode": "P0",
+    "Airline": "Proflight Zambia"
+  },
+  {
+    "Kode": "OQ",
+    "Airline": "Chongqing Airlines"
+  },
+  {
+    "Kode": "P2",
+    "Airline": "Airkenya"
+  },
+  {
+    "Kode": "OR",
+    "Airline": "TUI Nederland"
+  },
+  {
+    "Kode": "P6",
+    "Airline": "Pascan"
+  },
+  {
+    "Kode": "OW",
+    "Airline": "Skyward Express"
+  },
+  {
+    "Kode": "PA",
+    "Airline": "airblue"
+  },
+  {
+    "Kode": "PB",
+    "Airline": "PAL Airlines"
+  },
+  {
+    "Kode": "PE",
+    "Airline": "People's"
+  },
+  {
+    "Kode": "PJ",
+    "Airline": "Air St. Pierre"
+  },
+  {
+    "Kode": "PM",
+    "Airline": "Canaryfly"
+  },
+  {
+    "Kode": "PN",
+    "Airline": "China West Air"
+  },
+  {
+    "Kode": "Q2",
+    "Airline": "Maldivian"
+  },
+  {
+    "Kode": "PV",
+    "Airline": "St Barth Commuter"
+  },
+  {
+    "Kode": "PW",
+    "Airline": "Precision Air"
+  },
+  {
+    "Kode": "Q9",
+    "Airline": "Wataniya Airways"
+  },
+  {
+    "Kode": "PX",
+    "Airline": "Air Niugini"
+  },
+  {
+    "Kode": "PY",
+    "Airline": "Surinam Airways"
+  },
+  {
+    "Kode": "QC",
+    "Airline": "Camair-Co"
+  },
+  {
+    "Kode": "QD",
+    "Airline": "JC Airlines"
+  },
+  {
+    "Kode": "QH",
+    "Airline": "Bamboo Airways"
+  },
+  {
+    "Kode": "QK",
+    "Airline": "Jazz"
+  },
+  {
+    "Kode": "QL",
+    "Airline": "LASER Airlines"
+  },
+  {
+    "Kode": "R2",
+    "Airline": "Transair"
+  },
+  {
+    "Kode": "QQ",
+    "Airline": "Alliance Airlines"
+  },
+  {
+    "Kode": "R5",
+    "Airline": "Jordan Aviation"
+  },
+  {
+    "Kode": "QU",
+    "Airline": "Azur Air Ukraine"
+  },
+  {
+    "Kode": "RA",
+    "Airline": "Nepal Airlines"
+  },
+  {
+    "Kode": "RC",
+    "Airline": "Atlantic Airways"
+  },
+  {
+    "Kode": "RE",
+    "Airline": "Stobart Air"
+  },
+  {
+    "Kode": "RM",
+    "Airline": "Aircompany Armenia"
+  },
+  {
+    "Kode": "RQ",
+    "Airline": "Kam Air"
+  },
+  {
+    "Kode": "S5",
+    "Airline": "Star Air"
+  },
+  {
+    "Kode": "S6",
+    "Airline": "Sunrise Airways"
+  },
+  {
+    "Kode": "RV",
+    "Airline": "Air Canada Rouge"
+  },
+  {
+    "Kode": "RW",
+    "Airline": "Royal Air Charter"
+  },
+  {
+    "Kode": "RY",
+    "Airline": "Jiangxi Air"
+  },
+  {
+    "Kode": "RZ",
+    "Airline": "SANSA"
+  },
+  {
+    "Kode": "SB",
+    "Airline": "Aircalin"
+  },
+  {
+    "Kode": "SE",
+    "Airline": "Sky Vision Airlines"
+  },
+  {
+    "Kode": "SF",
+    "Airline": "Tassili Airlines"
+  },
+  {
+    "Kode": "SI",
+    "Airline": "Blue Islands"
+  },
+  {
+    "Kode": "SJ",
+    "Airline": "Sriwijaya Air"
+  },
+  {
+    "Kode": "SP",
+    "Airline": "SATA Air Acores"
+  },
+  {
+    "Kode": "T3",
+    "Airline": "Eastern Airways"
+  },
+  {
+    "Kode": "SR",
+    "Airline": "Sundair"
+  },
+  {
+    "Kode": "T5",
+    "Airline": "Turkmenistan Airlines"
+  },
+  {
+    "Kode": "T6",
+    "Airline": "AirSWIFT"
+  },
+  {
+    "Kode": "T7",
+    "Airline": "TWIN JET"
+  },
+  {
+    "Kode": "SZ",
+    "Airline": "Somon Air"
+  },
+  {
+    "Kode": "TA",
+    "Airline": "Avianca"
+  },
+  {
+    "Kode": "3E",
+    "Airline": "Air Choice One"
+  },
+  {
+    "Kode": "TF",
+    "Airline": "Braathens Regional Aviation"
+  },
+  {
+    "Kode": "3F",
+    "Airline": "FLYONE Armenia"
+  },
+  {
+    "Kode": "3H",
+    "Airline": "Air Inuit"
+  },
+  {
+    "Kode": "TI",
+    "Airline": "Tailwind Airlines"
+  },
+  {
+    "Kode": "TJ",
+    "Airline": "Tradewind"
+  },
+  {
+    "Kode": "TL",
+    "Airline": "Airnorth"
+  },
+  {
+    "Kode": "TM",
+    "Airline": "LAM"
+  },
+  {
+    "Kode": "3O",
+    "Airline": "Air Arabia Maroc"
+  },
+  {
+    "Kode": "U4",
+    "Airline": "Buddha Air"
+  },
+  {
+    "Kode": "TV",
+    "Airline": "Tibet Airlines"
+  },
+  {
+    "Kode": "3U",
+    "Airline": "Sichuan Airlines"
+  },
+  {
+    "Kode": "TY",
+    "Airline": "Air Caledonie"
+  },
+  {
+    "Kode": "3Z",
+    "Airline": "Smartwings Poland"
+  },
+  {
+    "Kode": "4A",
+    "Airline": "ATSA Airlines"
+  },
+  {
+    "Kode": "UB",
+    "Airline": "Myanmar National Airlines"
+  },
+  {
+    "Kode": "UD",
+    "Airline": "UR Airlines"
+  },
+  {
+    "Kode": "4D",
+    "Airline": "Flyyo"
+  },
+  {
+    "Kode": "UG",
+    "Airline": "Tunisair Express"
+  },
+  {
+    "Kode": "UI",
+    "Airline": "Auric Air"
+  },
+  {
+    "Kode": "UJ",
+    "Airline": "AlMasria Airlines"
+  },
+  {
+    "Kode": "UK",
+    "Airline": "Vistara"
+  },
+  {
+    "Kode": "UM",
+    "Airline": "Air Zimbabwe"
+  },
+  {
+    "Kode": "4M",
+    "Airline": "MGA"
+  },
+  {
+    "Kode": "UN",
+    "Airline": "Business Aviation Asia"
+  },
+  {
+    "Kode": "4N",
+    "Airline": "Air North"
+  },
+  {
+    "Kode": "4O",
+    "Airline": "Air Montenegro"
+  },
+  {
+    "Kode": "UP",
+    "Airline": "Bahamasair"
+  },
+  {
+    "Kode": "UQ",
+    "Airline": "Urumqi Air"
+  },
+  {
+    "Kode": "UU",
+    "Airline": "Air Austral"
+  },
+  {
+    "Kode": "4Y",
+    "Airline": "Discover Airlines"
+  },
+  {
+    "Kode": "4Z",
+    "Airline": "Airlink"
+  },
+  {
+    "Kode": "VE",
+    "Airline": "CLIC"
+  },
+  {
+    "Kode": "5F",
+    "Airline": "FLYONE"
+  },
+  {
+    "Kode": "5O",
+    "Airline": "ASL Airlines France"
+  },
+  {
+    "Kode": "W3",
+    "Airline": "Arik Air"
+  },
+  {
+    "Kode": "VR",
+    "Airline": "Cabo Verde Airlines"
+  },
+  {
+    "Kode": "VT",
+    "Airline": "Air Tahiti"
+  },
+  {
+    "Kode": "5T",
+    "Airline": "Canadian North"
+  },
+  {
+    "Kode": "VU",
+    "Airline": "Vietravel Airlines"
+  },
+  {
+    "Kode": "5U",
+    "Airline": "TAG Airlines"
+  },
+  {
+    "Kode": "W7",
+    "Airline": "Wings of Lebanon"
+  },
+  {
+    "Kode": "WA",
+    "Airline": "KLM Cityhopper"
+  },
+  {
+    "Kode": "6D",
+    "Airline": "Smartwings Slovakia"
+  },
+  {
+    "Kode": "WF",
+    "Airline": "Wideroe"
+  },
+  {
+    "Kode": "WH",
+    "Airline": "Webjet Linhas Aereas"
+  },
+  {
+    "Kode": "6H",
+    "Airline": "ISRAIR"
+  },
+  {
+    "Kode": "6I",
+    "Airline": "Alsie Express"
+  },
+  {
+    "Kode": "WJ",
+    "Airline": "JetSMART"
+  },
+  {
+    "Kode": "6J",
+    "Airline": "Solaseed Air"
+  },
+  {
+    "Kode": "WK",
+    "Airline": "Edelweiss Air"
+  },
+  {
+    "Kode": "WM",
+    "Airline": "Winair"
+  },
+  {
+    "Kode": "6O",
+    "Airline": "Orbest"
+  },
+  {
+    "Kode": "X3",
+    "Airline": "TUI fly"
+  },
+  {
+    "Kode": "WX",
+    "Airline": "CityJet"
+  },
+  {
+    "Kode": "6Y",
+    "Airline": "SmartLynx"
+  },
+  {
+    "Kode": "7G",
+    "Airline": "Star Flyer"
+  },
+  {
+    "Kode": "XK",
+    "Airline": "Air Corsica"
+  },
+  {
+    "Kode": "XN",
+    "Airline": "Mexicana de Aviación"
+  },
+  {
+    "Kode": "XQ",
+    "Airline": "SunExpress"
+  },
+  {
+    "Kode": "Y4",
+    "Airline": "Volaris"
+  },
+  {
+    "Kode": "Y8",
+    "Airline": "Suparna Airlines"
+  },
+  {
+    "Kode": "XW",
+    "Airline": "NokScoot"
+  },
+  {
+    "Kode": "XY",
+    "Airline": "flynas"
+  },
+  {
+    "Kode": "8B",
+    "Airline": "TransNusa"
+  },
+  {
+    "Kode": "8H",
+    "Airline": "BH Air"
+  },
+  {
+    "Kode": "8L",
+    "Airline": "Lucky Air"
+  },
+  {
+    "Kode": "8N",
+    "Airline": "Regional Air"
+  },
+  {
+    "Kode": "8O",
+    "Airline": "West Coast Air"
+  },
+  {
+    "Kode": "8P",
+    "Airline": "Pacific Coastal Airlines"
+  },
+  {
+    "Kode": "8R",
+    "Airline": "AMELIA"
+  },
+  {
+    "Kode": "YW",
+    "Airline": "Air Nostrum"
+  },
+  {
+    "Kode": "9D",
+    "Airline": "Genghis Khan Airlines"
+  },
+  {
+    "Kode": "9H",
+    "Airline": "AIR CHANGAN"
+  },
+  {
+    "Kode": "9I",
+    "Airline": "Alliance Air"
+  },
+  {
+    "Kode": "9K",
+    "Airline": "Cape Air"
+  },
+  {
+    "Kode": "9M",
+    "Airline": "Central Mountain Air"
+  },
+  {
+    "Kode": "9N",
+    "Airline": "Tropic Air"
+  },
+  {
+    "Kode": "9R",
+    "Airline": "SATENA"
+  },
+  {
+    "Kode": "9X",
+    "Airline": "Southern / Mokulele"
+  }
+]
