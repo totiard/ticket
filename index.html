@@ -557,7 +557,7 @@
             // Fetch data
             try {
                 const [airlinesRes, airportsRes] = await Promise.all([
-                    fetch('https://raw.githubusercontent.com/totiard/ticket/main/maskapai.json'),
+                    fetch('maskapai.json'),
                     fetch('https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv')
                 ]);
 
