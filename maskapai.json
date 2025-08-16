@@ -103,6 +103,10 @@
     "Kode": "B6",
     "Airline": "JetBlue"
   },
+   {
+    "Kode": "IU",
+    "Airline": "Super Air Jet"
+  },
   {
     "Kode": "MH",
     "Airline": "Malaysia Airlines"
