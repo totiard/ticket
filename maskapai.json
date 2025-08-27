@@ -273,7 +273,7 @@
   },
   {
     "Kode": "GA",
-    "Airline": "Garuda Indonesia"
+    "Airline": "Garuda "
   },
   {
     "Kode": "KQ",
@@ -670,6 +670,10 @@
   {
     "Kode": "QZ",
     "Airline": "Indonesia AirAsia"
+  },
+  {
+    "Kode": "AK",
+    "Airline": "AirAsia Berhand (Malaysia)"
   },
   {
     "Kode": "SC",
