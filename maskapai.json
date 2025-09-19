@@ -281,7 +281,7 @@
   },
   {
     "Kode": "OD",
-    "Airline": "Batik Air"
+    "Airline": "Batik Air Malaysia"
   },
   {
     "Kode": "TR",
@@ -534,6 +534,14 @@
   {
     "Kode": "ID",
     "Airline": "Batik Air"
+  },
+  {
+    "Kode": "FS",
+    "Airline": "Airfast Indonesia"
+  },
+  {
+    "Kode": "IP",
+    "Airline": "Pelita Air"
   },
   {
     "Kode": "J2",
