@@ -4,266 +4,143 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Flight Ticket Formatter</title>
-    <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>✈️</text></svg>">
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
-            background-size: 20px 20px;
         }
-        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: #1f2937; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #6b7280; }
-        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #4b5563;
+            border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #6b7280;
+        }
         .autocomplete-items {
-            position: absolute; border: 1px solid #4a5568; border-top: none; z-index: 99;
-            top: 100%; left: 0; right: 0; background-color: #1f2937;
-            border-radius: 0 0 0.5rem 0.5rem; max-height: 200px; overflow-y: auto;
+            position: absolute;
+            border: 1px solid #4a5568;
+            border-top: none;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #1f2937;
+            border-radius: 0 0 0.5rem 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
         }
         .autocomplete-items div {
-            padding: 10px; cursor: pointer; color: #d1d5db; border-bottom: 1px solid #374151;
+            padding: 10px;
+            cursor: pointer;
+            color: #d1d5db;
+            border-bottom: 1px solid #374151;
         }
-        .autocomplete-items div:last-child { border-bottom: none; }
-        .autocomplete-items div:hover { background-color: #374151; color: #ffffff; }
-        .autocomplete-active { background-color: #4f46e5 !important; color: #ffffff; }
-        
-        .tab-button.active, .trip-tab.active { background-color: #4f46e5; color: white; }
-        
+        .autocomplete-items div:last-child {
+            border-bottom: none;
+        }
+        .autocomplete-items div:hover {
+            background-color: #374151;
+            color: #ffffff;
+        }
+        .autocomplete-active {
+            background-color: #4f46e5 !important;
+            color: #ffffff;
+        }
+        .tab-button.active {
+            background-color: #4f46e5;
+            color: white;
+        }
+        /* Hide number input spinners */
         input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input[type=number] { -moz-appearance: textfield; }
-        
-        .output-ticket { border-left: 5px solid #4f46e5; }
-        
-        #toast-popup {
-            position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out; z-index: 100;
+        input[type=number]::-webkit-outer-spin-button { 
+          -webkit-appearance: none; 
+          margin: 0; 
+        }
+        input[type=number] {
+          -moz-appearance: textfield;
         }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-200 antialiased flex flex-col min-h-screen">
     <div class="container mx-auto p-4 md:p-8 flex-grow">
         <header class="text-center mb-8">
-            <h1 class="text-3xl md:text-4xl font-bold text-white flex items-center justify-center gap-3">
-                <i class="fa-solid fa-plane-departure text-indigo-400"></i>
-                Flight Ticket Formatter
-            </h1>
+            <h1 class="text-3xl md:text-4xl font-bold text-white">Flight Ticket Formatter</h1>
             <p class="text-gray-400 mt-2">Buat format tiket penerbangan dengan cepat dan akurat.</p>
         </header>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Input Section -->
             <div class="bg-gray-800 p-6 rounded-xl shadow-2xl">
+                <h2 class="text-2xl font-semibold mb-6 border-b border-gray-700 pb-4 text-white">Detail Penerbangan</h2>
                 
-                <!-- Tipe Perjalanan Tabs -->
-                <div class="flex space-x-2 bg-gray-700 p-1 rounded-lg mb-6">
-                    <button id="tripOneWayTab" class="trip-tab flex-1 p-2 rounded-md text-sm font-medium transition active">Sekali Jalan</button>
-                    <button id="tripRoundTripTab" class="trip-tab flex-1 p-2 rounded-md text-sm font-medium transition">Pulang Pergi / Multi</button>
-                </div>
-
-                <h2 class="text-2xl font-semibold mb-6 border-b border-gray-700 pb-4 text-white flex items-center gap-3"><i class="fa-solid fa-file-invoice"></i> Detail Penerbangan</h2>
-                
-                <!-- TAB 1: SEKALI JALAN (ONE WAY) -->
-                <div id="sectionOneWay" class="space-y-6">
+                <div class="space-y-6">
                     <!-- Route -->
-                    <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-                        <div class="relative autocomplete w-full">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Asal</label>
-                            <input type="text" id="origin" placeholder="Contoh: JAKARTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="relative autocomplete">
+                            <label for="origin" class="block text-sm font-medium text-gray-300 mb-1">Penerbangan Asal</label>
+                            <input type="text" id="origin" placeholder="Contoh: JAKARTA - SOEKARNO HATTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
-                        <div class="mt-2 md:mt-6">
-                            <button id="swapRouteButton" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
-                        </div>
-                        <div class="relative autocomplete w-full">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Tujuan</label>
-                            <input type="text" id="destination" placeholder="Contoh: SINGAPORE (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
+                        <div class="relative autocomplete">
+                            <label for="destination" class="block text-sm font-medium text-gray-300 mb-1">Penerbangan Tujuan</label>
+                            <input type="text" id="destination" placeholder="Contoh: SINGAPORE - CHANGI (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                         </div>
                     </div>
 
                     <!-- Date -->
                     <div>
-                        <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-calendar-days w-4"></i> Tanggal Keberangkatan</label>
-                        <input type="date" id="flightDate" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
+                        <label for="flightDate" class="block text-sm font-medium text-gray-300 mb-1">Tanggal Keberangkatan</label>
+                        <input type="date" id="flightDate" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
                     </div>
 
                     <!-- Airline -->
                     <div class="relative autocomplete">
-                        <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai</label>
-                        <input type="text" id="airline" placeholder="Contoh: AirAsia Indonesia" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                        <label for="airline" class="block text-sm font-medium text-gray-300 mb-1">Maskapai</label>
+                        <input type="text" id="airline" placeholder="Contoh: AirAsia Indonesia" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                     </div>
 
                     <!-- Flight Time & Code -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-regular fa-clock"></i> Berangkat</label>
-                            <input type="time" id="departureTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
+                            <label for="departureTime" class="block text-sm font-medium text-gray-300 mb-1">Jam Berangkat</label>
+                            <input type="time" id="departureTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
                         </div>
                         <div>
-                             <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-clock"></i> Tiba</label>
-                            <input type="time" id="arrivalTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
+                             <label for="arrivalTime" class="block text-sm font-medium text-gray-300 mb-1">Jam Tiba</label>
+                            <input type="time" id="arrivalTime" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition" style="color-scheme: dark;">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-barcode"></i> Kode</label>
+                            <label for="flightCode" class="block text-sm font-medium text-gray-300 mb-1">Kode Penerbangan</label>
                             <div class="flex">
                                 <span id="airlineCode" class="inline-flex items-center px-3 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600">--</span>
-                                <input type="text" id="flightCode" placeholder="262" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                                <input type="text" id="flightCode" placeholder="Contoh: 262" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- TAB 2: PULANG PERGI / MULTI (ROUND TRIP) -->
-                <div id="sectionRoundTrip" class="space-y-6 hidden">
-                    <!-- RT Route -->
-                    <div>
-                        <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
-                            <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Asal (Pergi)</label>
-                                <input type="text" id="rtOrigin1" placeholder="CGK" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                            </div>
-                            <div class="mt-2 md:mt-6">
-                                <button id="rtSwapRoute1" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
-                            </div>
-                            <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Tujuan (Pergi)</label>
-                                <input type="text" id="rtDest1" placeholder="KUL" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                            </div>
-                        </div>
-                        <!-- RT Route Options -->
-                        <div class="flex items-center space-x-4 mt-3">
-                            <label class="flex items-center text-sm text-gray-300 cursor-pointer">
-                                <input type="checkbox" id="rtIsPP" checked class="mr-2 rounded text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500 w-4 h-4">
-                                Rute PP (Pulang Pergi)
-                            </label>
-                            <button id="rtAddRouteBtn" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <i class="fa-solid fa-plus"></i> Rute Pulang Berbeda
-                            </button>
-                        </div>
-                        
-                        <!-- Route 2 (Return/Multi) -->
-                        <div id="rtRoute2Container" class="hidden flex-col md:flex-row items-center gap-2 md:gap-4 mt-4 p-4 bg-gray-750 border border-gray-700 rounded-lg bg-gray-800 shadow-inner">
-                            <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Asal (Pulang)</label>
-                                <input type="text" id="rtOrigin2" placeholder="SIN" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                            </div>
-                            <div class="mt-2 md:mt-6">
-                                <button id="rtSwapRoute2" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
-                            </div>
-                            <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Tujuan (Pulang)</label>
-                                <input type="text" id="rtDest2" placeholder="CGK" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RT Dates -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-calendar-days w-4"></i> Tgl Berangkat</label>
-                            <input type="date" id="rtDate1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-calendar-check w-4"></i> Tgl Pulang</label>
-                            <input type="date" id="rtDate2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                        </div>
-                    </div>
-
-                    <!-- RT Airline -->
-                    <div>
-                        <div class="relative autocomplete">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pergi)</label>
-                            <input type="text" id="rtAirline1" placeholder="AirAsia Berhad" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                        </div>
-                        <!-- RT Airline Options -->
-                        <div class="flex items-center space-x-4 mt-3">
-                            <label class="flex items-center text-sm text-gray-300 cursor-pointer">
-                                <input type="checkbox" id="rtSameAirline" checked class="mr-2 rounded text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500 w-4 h-4">
-                                Maskapai Pulang Sama
-                            </label>
-                            <button id="rtAddAirlineBtn" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <i class="fa-solid fa-plus"></i> Maskapai Pulang Beda
-                            </button>
-                        </div>
-                        
-                        <!-- Airline 2 (Return) -->
-                        <div id="rtAirline2Container" class="hidden relative autocomplete mt-4 p-4 bg-gray-750 border border-gray-700 rounded-lg bg-gray-800 shadow-inner">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pulang)</label>
-                            <input type="text" id="rtAirline2" placeholder="Lion Air" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
-                        </div>
-                    </div>
-
-                    <!-- RT Flight Time & Code -->
-                    <div class="space-y-4">
-                        <!-- Pergi -->
-                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-inner">
-                            <h4 class="text-sm font-medium text-indigo-400 mb-3"><i class="fa-solid fa-plane-departure"></i> Jadwal Pergi</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Berangkat</label>
-                                    <input type="time" id="rtDepTime1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                     <label class="block text-xs text-gray-400 mb-1">Tiba</label>
-                                    <input type="time" id="rtArrTime1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Kode</label>
-                                    <div class="flex">
-                                        <span id="rtAirlineCode1" class="inline-flex items-center px-2 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600 text-xs">--</span>
-                                        <input type="text" id="rtFlightCode1" placeholder="AK-351" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-2 focus:ring-2 focus:ring-indigo-500 transition">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Pulang -->
-                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-inner">
-                            <h4 class="text-sm font-medium text-indigo-400 mb-3"><i class="fa-solid fa-plane-arrival"></i> Jadwal Pulang</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Berangkat</label>
-                                    <input type="time" id="rtDepTime2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                     <label class="block text-xs text-gray-400 mb-1">Tiba</label>
-                                    <input type="time" id="rtArrTime2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Kode</label>
-                                    <div class="flex">
-                                        <span id="rtAirlineCode2" class="inline-flex items-center px-2 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600 text-xs">--</span>
-                                        <input type="text" id="rtFlightCode2" placeholder="QZ-200" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-2 focus:ring-2 focus:ring-indigo-500 transition">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SHARED: Passenger Data Section -->
-                <div id="paxDataSection" class="mt-8 pt-6 border-t border-gray-700">
-                    <h3 class="text-xl font-semibold mb-4 text-white flex items-center gap-3"><i class="fa-solid fa-users"></i> Data Penumpang (PAX)</h3>
                     
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-300 mb-1">Jumlah Penumpang</label>
-                        <input type="number" id="paxCount" min="1" placeholder="Contoh: 5" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                    <!-- PAX -->
+                    <div>
+                        <label for="paxCount" class="block text-sm font-medium text-gray-300 mb-1">Jumlah Penumpang (PAX)</label>
+                        <input type="number" id="paxCount" min="1" placeholder="Contoh: 5" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition">
                     </div>
+                </div>
 
+                <!-- Passenger Data Section -->
+                <div id="paxDataSection" class="mt-8 pt-6 border-t border-gray-700">
+                    <h3 class="text-xl font-semibold mb-4 text-white">Data Penumpang</h3>
                     <div class="mb-4">
                         <div class="flex space-x-2 bg-gray-700 p-1 rounded-lg">
-                            <button id="manualTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition active"><i class="fa-solid fa-keyboard mr-2"></i>Manual</button>
-                            <button id="excelTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition"><i class="fa-solid fa-file-excel mr-2"></i>Excel</button>
-                            <button id="imageTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition"><i class="fa-solid fa-file-image mr-2"></i>Image</button>
+                            <button id="manualTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition active">Manual</button>
+                            <button id="excelTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition">Excel/Spreadsheet</button>
+                            <button id="imageTab" class="tab-button flex-1 p-2 rounded-md text-sm font-medium transition">Image Text</button>
                         </div>
                     </div>
 
@@ -272,33 +149,38 @@
 
                     <!-- Excel/Spreadsheet Input Area -->
                     <div id="excelInputArea" class="hidden">
-                        <label class="block text-sm font-medium text-gray-300 mb-2">Paste data dari Excel/Spreadsheet:</label>
-                        <textarea id="excelPaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;ROCHMAT GUMELAR 	Sukabumi, 31 Desember 2008"></textarea>
+                        <label for="excelPaste" class="block text-sm font-medium text-gray-300 mb-2">Paste data dari Excel/Spreadsheet:</label>
+                        <textarea id="excelPaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;ROCHMAT GUMELAR	Sukabumi, 31 Desember 2008&#10;MUHAMMAD FAZRUL ANNAS 	Sukabumi, 06 Mei 2009"></textarea>
                     </div>
 
                     <!-- Image Text Input Area -->
                     <div id="imageInputArea" class="hidden">
-                         <label class="block text-sm font-medium text-gray-300 mb-2">Paste data dari hasil Image-to-Text:</label>
-                        <textarea id="imagePaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;NAMA PENUMPANG 1&#10;NAMA PENUMPANG 2&#10;Kota, 29 November 2008 Kota, 18 Agustus 2008"></textarea>
+                         <label for="imagePaste" class="block text-sm font-medium text-gray-300 mb-2">Paste data dari hasil Image-to-Text:</label>
+                        <textarea id="imagePaste" rows="8" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition custom-scrollbar" placeholder="Contoh:&#10;NAMA PENUMPANG 1&#10;NAMA PENUMPANG 2&#10;Kota, 29 November 2008 Kota, 18 Agustus 2008"></textarea>
                     </div>
                 </div>
             </div>
 
             <!-- Output Section -->
-            <div class="bg-gray-800 p-6 rounded-xl shadow-2xl flex flex-col h-full lg:sticky lg:top-8">
+            <div class="bg-gray-800 p-6 rounded-xl shadow-2xl flex flex-col">
                 <div class="flex justify-between items-center mb-4 border-b border-gray-700 pb-4">
-                    <h2 class="text-2xl font-semibold text-white flex items-center gap-3"><i class="fa-solid fa-ticket text-indigo-400"></i>Hasil Format</h2>
+                    <h2 class="text-2xl font-semibold text-white">Hasil Format</h2>
                     <div class="flex items-center space-x-3">
-                        <button id="copyButton" class="p-2 w-10 h-10 flex items-center justify-center rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition-all duration-200" title="Salin Teks">
-                            <i class="fa-regular fa-copy"></i>
+                        <button id="copyButton" class="p-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500" title="Salin Teks">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                         </button>
-                        <button id="lockButton" class="p-2 w-10 h-10 flex items-center justify-center rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-all duration-200" title="Kunci/Buka Edit">
-                            <span id="lockIcon"><i class="fa-solid fa-lock"></i></span>
-                            <span id="unlockIcon" class="hidden"><i class="fa-solid fa-lock-open"></i></span>
+                        <button id="lockButton" class="p-2 rounded-lg bg-gray-700 hover:bg-gray-600 text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-gray-500" title="Kunci/Buka Edit">
+                            <span id="lockIcon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            </span>
+                             <span id="unlockIcon" class="hidden">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 9.9-1"></path></svg>
+                            </span>
                         </button>
                     </div>
                 </div>
-                <textarea id="output" readonly class="flex-grow w-full bg-gray-900 text-gray-300 rounded-lg p-4 font-mono text-sm whitespace-pre border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none custom-scrollbar transition-all duration-300 output-ticket min-h-[400px]" style="line-height: 1.6;"></textarea>
+                <textarea id="output" readonly class="flex-grow w-full bg-gray-900 text-gray-300 rounded-lg p-4 font-mono text-sm whitespace-pre border border-gray-700 focus:ring-2 focus:ring-indigo-500 focus:outline-none custom-scrollbar transition-all duration-300" style="line-height: 1.6;"></textarea>
+                <div id="copy-feedback" class="text-center text-green-400 font-medium h-6 mt-2 transition-opacity duration-300 opacity-0">Teks berhasil disalin!</div>
             </div>
         </div>
     </div>
@@ -306,13 +188,10 @@
         <p class="text-sm text-gray-400">Dibuat oleh <a href="https://totiard.github.io/Profile-New/" target="_blank" rel="noopener noreferrer" class="font-semibold text-indigo-400 hover:text-indigo-300">Toti Ardianysah</a></p>
     </footer>
 
-    <!-- Toast/Popup -->
-    <div id="toast-popup" class="hidden opacity-0 bg-green-500 text-white text-sm font-bold px-6 py-3 rounded-lg shadow-lg">
-        <i class="fa-solid fa-check-circle mr-2"></i> Teks berhasil disalin!
-    </div>
-
-    <!-- Datalist for Month input -->
+    <!-- Datalists for DOB inputs -->
+    <datalist id="day-list"></datalist>
     <datalist id="month-list"></datalist>
+    <datalist id="year-list"></datalist>
 
     <script>
         // --- DATA ---
@@ -325,54 +204,14 @@
 
         // --- DOM ELEMENTS ---
         const elements = {
-            // Trip Type
-            tripOneWayTab: document.getElementById('tripOneWayTab'),
-            tripRoundTripTab: document.getElementById('tripRoundTripTab'),
-            sectionOneWay: document.getElementById('sectionOneWay'),
-            sectionRoundTrip: document.getElementById('sectionRoundTrip'),
-
-            // One Way Elements
             origin: document.getElementById('origin'),
             destination: document.getElementById('destination'),
-            swapRouteButton: document.getElementById('swapRouteButton'),
             flightDate: document.getElementById('flightDate'),
             airline: document.getElementById('airline'),
             departureTime: document.getElementById('departureTime'),
             arrivalTime: document.getElementById('arrivalTime'),
             airlineCode: document.getElementById('airlineCode'),
             flightCode: document.getElementById('flightCode'),
-
-            // Round Trip Elements
-            rtOrigin1: document.getElementById('rtOrigin1'),
-            rtDest1: document.getElementById('rtDest1'),
-            rtSwapRoute1: document.getElementById('rtSwapRoute1'),
-            rtIsPP: document.getElementById('rtIsPP'),
-            rtAddRouteBtn: document.getElementById('rtAddRouteBtn'),
-            rtRoute2Container: document.getElementById('rtRoute2Container'),
-            rtOrigin2: document.getElementById('rtOrigin2'),
-            rtDest2: document.getElementById('rtDest2'),
-            rtSwapRoute2: document.getElementById('rtSwapRoute2'),
-            
-            rtDate1: document.getElementById('rtDate1'),
-            rtDate2: document.getElementById('rtDate2'),
-            
-            rtAirline1: document.getElementById('rtAirline1'),
-            rtSameAirline: document.getElementById('rtSameAirline'),
-            rtAddAirlineBtn: document.getElementById('rtAddAirlineBtn'),
-            rtAirline2Container: document.getElementById('rtAirline2Container'),
-            rtAirline2: document.getElementById('rtAirline2'),
-            
-            rtDepTime1: document.getElementById('rtDepTime1'),
-            rtArrTime1: document.getElementById('rtArrTime1'),
-            rtAirlineCode1: document.getElementById('rtAirlineCode1'),
-            rtFlightCode1: document.getElementById('rtFlightCode1'),
-            
-            rtDepTime2: document.getElementById('rtDepTime2'),
-            rtArrTime2: document.getElementById('rtArrTime2'),
-            rtAirlineCode2: document.getElementById('rtAirlineCode2'),
-            rtFlightCode2: document.getElementById('rtFlightCode2'),
-
-            // Shared PAX Elements
             paxCount: document.getElementById('paxCount'),
             manualInputArea: document.getElementById('manualInputArea'),
             excelInputArea: document.getElementById('excelInputArea'),
@@ -382,20 +221,18 @@
             manualTab: document.getElementById('manualTab'),
             excelTab: document.getElementById('excelTab'),
             imageTab: document.getElementById('imageTab'),
-
-            // Utility Elements
             output: document.getElementById('output'),
             copyButton: document.getElementById('copyButton'),
             lockButton: document.getElementById('lockButton'),
             lockIcon: document.getElementById('lockIcon'),
             unlockIcon: document.getElementById('unlockIcon'),
-            toastPopup: document.getElementById('toast-popup'),
+            copyFeedback: document.getElementById('copy-feedback'),
         };
 
         // --- STATE ---
         let state = {
-            tripType: 'oneway', // 'oneway' or 'roundtrip'
-            activeTab: 'manual', // pax data tab
+            isLocked: true,
+            activeTab: 'manual',
             paxData: []
         };
 
@@ -419,67 +256,23 @@
         
         const getIataCode = (value) => {
             const match = value.match(/\(([^)]+)\)$/);
-            return match ? match[1].trim() : (value.trim() || '...');
+            return match ? match[1].trim() : '';
         };
-
-        // --- TAB SWITCHING (TRIP TYPE) ---
-        elements.tripOneWayTab.addEventListener('click', () => {
-            state.tripType = 'oneway';
-            elements.tripOneWayTab.classList.add('active');
-            elements.tripRoundTripTab.classList.remove('active');
-            elements.sectionOneWay.classList.remove('hidden');
-            elements.sectionRoundTrip.classList.add('hidden');
-            generateOutput();
-        });
-
-        elements.tripRoundTripTab.addEventListener('click', () => {
-            state.tripType = 'roundtrip';
-            elements.tripRoundTripTab.classList.add('active');
-            elements.tripOneWayTab.classList.remove('active');
-            elements.sectionRoundTrip.classList.remove('hidden');
-            elements.sectionOneWay.classList.add('hidden');
-            generateOutput();
-        });
-
-        // --- ROUND TRIP TOGGLES ---
-        elements.rtIsPP.addEventListener('change', (e) => {
-            if(e.target.checked) {
-                elements.rtRoute2Container.classList.add('hidden');
-                elements.rtRoute2Container.classList.remove('flex');
-            } else {
-                elements.rtRoute2Container.classList.remove('hidden');
-                elements.rtRoute2Container.classList.add('flex');
-            }
-            generateOutput();
-        });
-
-        elements.rtAddRouteBtn.addEventListener('click', () => {
-            elements.rtIsPP.checked = false;
-            elements.rtRoute2Container.classList.remove('hidden');
-            elements.rtRoute2Container.classList.add('flex');
-            generateOutput();
-        });
-
-        elements.rtSameAirline.addEventListener('change', (e) => {
-            if(e.target.checked) {
-                elements.rtAirline2Container.classList.add('hidden');
-            } else {
-                elements.rtAirline2Container.classList.remove('hidden');
-            }
-            generateOutput();
-        });
-
-        elements.rtAddAirlineBtn.addEventListener('click', () => {
-            elements.rtSameAirline.checked = false;
-            elements.rtAirline2Container.classList.remove('hidden');
-            generateOutput();
-        });
 
         // --- CORE LOGIC ---
         function generateOutput() {
-            if (!elements.output.readOnly) return; // Only generate if output is locked
+            const originCode = getIataCode(elements.origin.value) || '...';
+            const destinationCode = getIataCode(elements.destination.value) || '...';
+            const dateText = formatDate(elements.flightDate.value);
+            const airlineName = elements.airline.value || 'Nama Maskapai';
+            const depTime = elements.departureTime.value.replace(':', '.') || '00.00';
+            const arrTime = elements.arrivalTime.value.replace(':', '.') || '00.00';
+            const airlineIata = elements.airlineCode.textContent;
+            const flightNum = elements.flightCode.value || 'XXX';
+            const paxNum = elements.paxCount.value || 'X';
 
             processPaxData();
+
             let paxDataString = "";
             if (state.paxData.length > 0) {
                 paxDataString = "\n\nData Pax :\n\n";
@@ -490,90 +283,12 @@
                 }).join('\n\n');
             }
 
-            const paxNum = elements.paxCount.value || 'X';
-            let finalOutput = "";
-
-            if (state.tripType === 'oneway') {
-                const originCode = getIataCode(elements.origin.value);
-                const destinationCode = getIataCode(elements.destination.value);
-                const dateText = formatDate(elements.flightDate.value);
-                const airlineName = elements.airline.value || 'Nama Maskapai';
-                const depTime = elements.departureTime.value.replace(':', '.') || '00.00';
-                const arrTime = elements.arrivalTime.value.replace(':', '.') || '00.00';
-                const airlineIata = elements.airlineCode.textContent;
-                const flightNum = elements.flightCode.value || 'XXX';
-
-                finalOutput = `${originCode} - ${destinationCode}\n` +
-                              `${dateText}\n` +
-                              `${airlineName}\n` +
-                              `${depTime} - ${arrTime} // ${airlineIata}-${flightNum}\n` +
-                              `${paxNum} PAX` +
-                              `${paxDataString}`;
-            } else {
-                // ROUND TRIP LOGIC
-                
-                // 1. Route
-                let routeStr = "";
-                const o1 = getIataCode(elements.rtOrigin1.value);
-                const d1 = getIataCode(elements.rtDest1.value);
-                if (elements.rtIsPP.checked) {
-                    routeStr = `${o1} - ${d1} PP`;
-                } else {
-                    const o2 = getIataCode(elements.rtOrigin2.value);
-                    const d2 = getIataCode(elements.rtDest2.value);
-                    routeStr = `${o1} - ${d1} & ${o2} - ${d2}`;
-                }
-
-                // 2. Date
-                let dateStr = "";
-                if (elements.rtDate1.value && elements.rtDate2.value) {
-                    const d1 = new Date(elements.rtDate1.value);
-                    const d2 = new Date(elements.rtDate2.value);
-                    
-                    const day1 = d1.getUTCDate();
-                    const month1 = monthIndonesian[d1.getUTCMonth()];
-                    const year1 = d1.getUTCFullYear();
-                    
-                    const day2 = d2.getUTCDate();
-                    const month2 = monthIndonesian[d2.getUTCMonth()];
-                    const year2 = d2.getUTCFullYear();
-
-                    if (year1 === year2 && month1 === month2) {
-                        dateStr = `Tanggal ${day1} & ${day2} ${month1} ${year1}`;
-                    } else if (year1 === year2) {
-                        dateStr = `Tanggal ${day1} ${month1} & ${day2} ${month2} ${year1}`;
-                    } else {
-                        dateStr = `Tanggal ${day1} ${month1} ${year1} & ${day2} ${month2} ${year2}`;
-                    }
-                } else {
-                    dateStr = "Tanggal DD & DD Bulan YYYY";
-                }
-
-                // 3. Airline
-                let airlineStr = elements.rtAirline1.value || 'Maskapai Berangkat';
-                if (!elements.rtSameAirline.checked) {
-                    airlineStr += ` & ${elements.rtAirline2.value || 'Maskapai Pulang'}`;
-                }
-
-                // 4. Time & Flight Code
-                const t1Dep = elements.rtDepTime1.value.replace(':', '.') || '00.00';
-                const t1Arr = elements.rtArrTime1.value.replace(':', '.') || '00.00';
-                const t2Dep = elements.rtDepTime2.value.replace(':', '.') || '00.00';
-                const t2Arr = elements.rtArrTime2.value.replace(':', '.') || '00.00';
-                
-                const c1 = `${elements.rtAirlineCode1.textContent}-${elements.rtFlightCode1.value || 'XXX'}`;
-                const c2 = `${elements.rtAirlineCode2.textContent}-${elements.rtFlightCode2.value || 'XXX'}`;
-                
-                // Format: Dep1-Arr1 & Dep2-Arr2 // Code1 & Code2
-                const timeCodeStr = `${t1Dep}-${t1Arr} & ${t2Dep}-${t2Arr} // ${c1} & ${c2}`;
-
-                finalOutput = `${routeStr}\n` +
-                              `${dateStr}\n` +
-                              `${airlineStr}\n` +
-                              `${timeCodeStr}\n` +
-                              `${paxNum} PAX` +
-                              `${paxDataString}`;
-            }
+            const finalOutput = `${originCode} - ${destinationCode}\n` +
+                                `${dateText}\n` +
+                                `${airlineName}\n` +
+                                `${depTime} - ${arrTime} // ${airlineIata}-${flightNum}\n` +
+                                `${paxNum} PAX` +
+                                `${paxDataString}`;
 
             elements.output.value = finalOutput;
         }
@@ -659,19 +374,19 @@
         function updateManualPaxInputs() {
             const count = parseInt(elements.paxCount.value) || 0;
             elements.manualInputArea.innerHTML = '';
-            if (count > 0 && count < 50) {
+            if (count > 0 && count < 50) { // Safety limit
                 let html = '';
                 for (let i = 0; i < count; i++) {
                     html += `
-                        <div class="bg-gray-750 p-4 rounded-lg border border-gray-700">
-                            <p class="font-semibold text-white mb-3 text-sm">Penumpang ${i + 1}</p>
+                        <div class="bg-gray-700 p-4 rounded-lg">
+                            <p class="font-semibold text-white mb-3">Penumpang ${i + 1}</p>
                             <div class="mb-3">
-                                <input type="text" id="paxName${i}" placeholder="Nama Lengkap" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 transition">
+                                <input type="text" id="paxName${i}" placeholder="Nama Lengkap" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                             <div class="grid grid-cols-3 gap-2">
-                                <input type="number" id="paxDay${i}" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 transition">
-                                <input type="text" id="paxMonth${i}" list="month-list" placeholder="Bulan" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 transition">
-                                <input type="number" id="paxYear${i}" placeholder="Tahun" min="1900" max="${new Date().getFullYear()}" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 transition">
+                                <input type="number" id="paxDay${i}" list="day-list" placeholder="Tgl" min="1" max="31" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="text" id="paxMonth${i}" list="month-list" placeholder="Bulan" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
+                                <input type="number" id="paxYear${i}" list="year-list" placeholder="Tahun" min="1500" max="2100" class="w-full bg-gray-600 border border-gray-500 text-white rounded-md p-2 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 transition">
                             </div>
                         </div>
                     `;
@@ -696,12 +411,9 @@
                         x[i].parentNode.removeChild(x[i]);
                     }
                 }
-                // Handle Airline Code updates
-                if (inp.id === 'airline' || inp.id === 'rtAirline1' || inp.id === 'rtAirline2') {
+                if (inp.id === 'airline') {
                     const selectedAirline = airlines.find(a => a.name === inp.value);
-                    const codeTarget = inp.id === 'airline' ? elements.airlineCode : 
-                                      (inp.id === 'rtAirline1' ? elements.rtAirlineCode1 : elements.rtAirlineCode2);
-                    codeTarget.textContent = selectedAirline ? selectedAirline.code : '--';
+                    elements.airlineCode.textContent = selectedAirline ? selectedAirline.code : '--';
                 }
                 generateOutput();
             }
@@ -725,7 +437,7 @@
                         } else {
                             b.innerHTML = arr[i].name;
                         }
-                        b.innerHTML += "<input type='hidden' value='" + arr[i].name.replace(/'/g, "&#39;") + "'>";
+                        b.innerHTML += "<input type='hidden' value='" + arr[i].name + "'>";
                         b.addEventListener("click", function(e) {
                             inp.value = this.getElementsByTagName("input")[0].value;
                             closeAllLists(this);
@@ -768,73 +480,38 @@
         }
         
         // --- EVENT LISTENERS ---
-        // Bind generateOutput to all relevant inputs
-        const inputsToBind = [
-            'flightDate', 'departureTime', 'arrivalTime', 'flightCode',
-            'rtDate1', 'rtDate2', 'rtDepTime1', 'rtArrTime1', 'rtFlightCode1',
-            'rtDepTime2', 'rtArrTime2', 'rtFlightCode2', 'excelPaste', 'imagePaste'
-        ];
-        inputsToBind.forEach(id => {
-            const el = document.getElementById(id);
-            if(el) {
-                el.addEventListener('input', generateOutput);
-                el.addEventListener('change', generateOutput);
+        Object.values(elements).forEach(el => {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                if(el.id !== 'origin' && el.id !== 'destination' && el.id !== 'airline') {
+                   el.addEventListener('input', generateOutput);
+                   el.addEventListener('change', generateOutput);
+                }
             }
         });
 
         elements.paxCount.addEventListener('input', updateManualPaxInputs);
 
-        // Swap Routes Handlers
-        elements.swapRouteButton.addEventListener('click', () => {
-            [elements.origin.value, elements.destination.value] = [elements.destination.value, elements.origin.value];
-            generateOutput();
-        });
-        elements.rtSwapRoute1.addEventListener('click', () => {
-            [elements.rtOrigin1.value, elements.rtDest1.value] = [elements.rtDest1.value, elements.rtOrigin1.value];
-            generateOutput();
-        });
-        elements.rtSwapRoute2.addEventListener('click', () => {
-            [elements.rtOrigin2.value, elements.rtDest2.value] = [elements.rtDest2.value, elements.rtOrigin2.value];
-            generateOutput();
-        });
-
-        // Lock/Copy
         elements.lockButton.addEventListener('click', () => {
-            if (elements.output.readOnly) {
-                elements.output.readOnly = false;
-                elements.lockIcon.classList.add('hidden');
-                elements.unlockIcon.classList.remove('hidden');
-                elements.lockButton.classList.add('bg-green-600', 'hover:bg-green-700');
-                elements.lockButton.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-                elements.output.classList.add('bg-gray-800');
-                elements.output.classList.remove('bg-gray-900');
-                elements.output.focus();
-            } else {
-                elements.output.readOnly = true;
-                elements.lockIcon.classList.remove('hidden');
-                elements.unlockIcon.classList.add('hidden');
-                elements.lockButton.classList.remove('bg-green-600', 'hover:bg-green-700');
-                elements.lockButton.classList.add('bg-gray-700', 'hover:bg-gray-600');
-                elements.output.classList.remove('bg-gray-800');
-                elements.output.classList.add('bg-gray-900');
-                generateOutput();
-            }
+            state.isLocked = !state.isLocked;
+            elements.output.readOnly = state.isLocked;
+            elements.lockIcon.classList.toggle('hidden', !state.isLocked);
+            elements.unlockIcon.classList.toggle('hidden', state.isLocked);
+            elements.lockButton.classList.toggle('bg-green-600', !state.isLocked);
+            elements.lockButton.classList.toggle('hover:bg-green-700', !state.isLocked);
+            elements.lockButton.classList.toggle('bg-gray-700', state.isLocked);
+            elements.lockButton.classList.toggle('hover:bg-gray-600', state.isLocked);
+            elements.output.classList.toggle('bg-gray-900', state.isLocked);
+            elements.output.classList.toggle('bg-gray-800', !state.isLocked);
         });
 
         elements.copyButton.addEventListener('click', () => {
             elements.output.select();
             document.execCommand('copy');
-            
-            elements.toastPopup.classList.remove('hidden');
-            setTimeout(() => elements.toastPopup.classList.remove('opacity-0'), 10);
-            setTimeout(() => {
-                elements.toastPopup.classList.add('opacity-0');
-                setTimeout(() => elements.toastPopup.classList.add('hidden'), 300);
-            }, 2000);
+            elements.copyFeedback.classList.remove('opacity-0');
+            setTimeout(() => { elements.copyFeedback.classList.add('opacity-0'); }, 2000);
         });
 
-        // PAX Tabs
-        function switchPaxTab(tabName) {
+        function switchTab(tabName) {
             state.activeTab = tabName;
             elements.manualInputArea.classList.toggle('hidden', tabName !== 'manual');
             elements.excelInputArea.classList.toggle('hidden', tabName !== 'excel');
@@ -845,12 +522,24 @@
             generateOutput();
         }
 
-        elements.manualTab.addEventListener('click', () => switchPaxTab('manual'));
-        elements.excelTab.addEventListener('click', () => switchPaxTab('excel'));
-        elements.imageTab.addEventListener('click', () => switchPaxTab('image'));
+        elements.manualTab.addEventListener('click', () => switchTab('manual'));
+        elements.excelTab.addEventListener('click', () => switchTab('excel'));
+        elements.imageTab.addEventListener('click', () => switchTab('image'));
 
         // --- DATA FETCHING & INITIALIZATION ---
         async function initialize() {
+            // Set default date
+            const today = new Date();
+            elements.flightDate.valueAsDate = today;
+
+            // Populate DOB datalists
+            const dayDatalist = document.getElementById('day-list');
+            for (let i = 1; i <= 31; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                dayDatalist.appendChild(option);
+            }
+
             const monthDatalist = document.getElementById('month-list');
             monthIndonesian.forEach(month => {
                 const option = document.createElement('option');
@@ -858,22 +547,33 @@
                 monthDatalist.appendChild(option);
             });
 
+            const yearDatalist = document.getElementById('year-list');
+            for (let i = 2100; i >= 1500; i--) {
+                const option = document.createElement('option');
+                option.value = i;
+                yearDatalist.appendChild(option);
+            }
+
+            // Fetch data
             try {
                 const [airlinesRes, airportsRes] = await Promise.all([
                     fetch('maskapai.json'),
-                    fetch('airport-codes.csv')
+                    fetch('https://raw.githubusercontent.com/datasets/airport-codes/main/data/airport-codes.csv')
                 ]);
 
                 if (airlinesRes.ok) {
                     const airlinesData = await airlinesRes.json();
                     airlines = airlinesData.map(item => ({ name: item.Airline, code: item.Kode })).sort((a, b) => a.name.localeCompare(b.name));
+                } else {
+                    console.error('Failed to fetch airlines');
                 }
 
                 if (airportsRes.ok) {
                     const airportsCSV = await airportsRes.text();
-                    const lines = airportsCSV.split('\n').slice(1);
+                    const lines = airportsCSV.split('\n').slice(1); // Skip header
                     airports = lines.map(line => {
                         const columns = line.split(',');
+                        // ident,type,name,elevation_ft,continent,iso_country,iso_region,municipality,gps_code,iata_code,local_code,coordinates
                         const iata = columns[9]?.replace(/"/g, '');
                         const name = columns[2]?.replace(/"/g, '');
                         const city = columns[7]?.replace(/"/g, '');
@@ -883,6 +583,8 @@
                         }
                         return null;
                     }).filter(Boolean).sort((a,b) => a.name.localeCompare(b.name));
+                } else {
+                     console.error('Failed to fetch airports');
                 }
 
             } catch (error) {
@@ -890,12 +592,11 @@
             }
 
             // Setup autocomplete
-            const autoElements = [elements.origin, elements.destination, elements.rtOrigin1, elements.rtDest1, elements.rtOrigin2, elements.rtDest2];
-            autoElements.forEach(el => autocomplete(el, airports));
+            autocomplete(elements.origin, airports);
+            autocomplete(elements.destination, airports);
+            autocomplete(elements.airline, airlines);
             
-            const airlineElements = [elements.airline, elements.rtAirline1, elements.rtAirline2];
-            airlineElements.forEach(el => autocomplete(el, airlines));
-            
+            // Initial render
             generateOutput();
         }
 
