@@ -9,7 +9,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,19 +139,17 @@
                                 <input type="text" id="rtDest1" placeholder="KUL" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                         </div>
-                        <!-- RT Route Options -->
+                        
+                        <!-- RT Route Checkbox -->
                         <div class="flex items-center space-x-4 mt-3">
                             <label class="flex items-center text-sm text-gray-300 cursor-pointer">
                                 <input type="checkbox" id="rtIsPP" checked class="mr-2 rounded text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500 w-4 h-4">
-                                Rute PP (Pulang Pergi)
+                                Rute Pulang Sama (PP)
                             </label>
-                            <button id="rtAddRouteBtn" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <i class="fa-solid fa-plus"></i> Rute Pulang Berbeda
-                            </button>
                         </div>
                         
-                        <!-- Route 2 (Return/Multi) -->
-                        <div id="rtRoute2Container" class="hidden flex-col md:flex-row items-center gap-2 md:gap-4 mt-4 p-4 bg-gray-750 border border-gray-700 rounded-lg bg-gray-800 shadow-inner">
+                        <!-- Route 2 (Return/Multi) - Muncul jika Checkbox PP tidak dicentang -->
+                        <div id="rtRoute2Container" class="hidden flex-col md:flex-row items-center gap-2 md:gap-4 mt-4">
                             <div class="relative autocomplete w-full">
                                 <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Asal (Pulang)</label>
                                 <input type="text" id="rtOrigin2" placeholder="SIN" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
@@ -184,67 +182,46 @@
                             <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pergi)</label>
                             <input type="text" id="rtAirline1" placeholder="AirAsia Berhad" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                         </div>
-                        <!-- RT Airline Options -->
+
+                        <!-- RT Airline Checkbox -->
                         <div class="flex items-center space-x-4 mt-3">
                             <label class="flex items-center text-sm text-gray-300 cursor-pointer">
                                 <input type="checkbox" id="rtSameAirline" checked class="mr-2 rounded text-indigo-500 bg-gray-700 border-gray-600 focus:ring-indigo-500 w-4 h-4">
                                 Maskapai Pulang Sama
                             </label>
-                            <button id="rtAddAirlineBtn" class="text-sm font-medium text-indigo-400 hover:text-indigo-300 transition-colors">
-                                <i class="fa-solid fa-plus"></i> Maskapai Pulang Beda
-                            </button>
                         </div>
                         
-                        <!-- Airline 2 (Return) -->
-                        <div id="rtAirline2Container" class="hidden relative autocomplete mt-4 p-4 bg-gray-750 border border-gray-700 rounded-lg bg-gray-800 shadow-inner">
+                        <!-- Airline 2 (Return) - Muncul jika Checkbox Maskapai Sama tidak dicentang -->
+                        <div id="rtAirline2Container" class="hidden relative autocomplete mt-4">
                             <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pulang)</label>
                             <input type="text" id="rtAirline2" placeholder="Lion Air" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                         </div>
                     </div>
 
-                    <!-- RT Flight Time & Code -->
-                    <div class="space-y-4">
-                        <!-- Pergi -->
-                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-inner">
-                            <h4 class="text-sm font-medium text-indigo-400 mb-3"><i class="fa-solid fa-plane-departure"></i> Jadwal Pergi</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Berangkat</label>
-                                    <input type="time" id="rtDepTime1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                     <label class="block text-xs text-gray-400 mb-1">Tiba</label>
-                                    <input type="time" id="rtArrTime1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Kode</label>
-                                    <div class="flex">
-                                        <span id="rtAirlineCode1" class="inline-flex items-center px-2 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600 text-xs">--</span>
-                                        <input type="text" id="rtFlightCode1" placeholder="AK-351" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-2 focus:ring-2 focus:ring-indigo-500 transition">
-                                    </div>
-                                </div>
-                            </div>
+                    <!-- RT Flight Time & Code (Satu Baris Sejajar & Tanpa Kotak) -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Pergi Time & Code -->
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-regular fa-clock"></i> Jam Berangkat (Pergi)</label>
+                            <input type="time" id="rtDepTime1" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-regular fa-clock"></i> Jam Berangkat (Pulang)</label>
+                            <input type="time" id="rtDepTime2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
                         </div>
                         
-                        <!-- Pulang -->
-                        <div class="bg-gray-800 border border-gray-700 p-4 rounded-lg shadow-inner">
-                            <h4 class="text-sm font-medium text-indigo-400 mb-3"><i class="fa-solid fa-plane-arrival"></i> Jadwal Pulang</h4>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Berangkat</label>
-                                    <input type="time" id="rtDepTime2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                     <label class="block text-xs text-gray-400 mb-1">Tiba</label>
-                                    <input type="time" id="rtArrTime2" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-2 focus:ring-2 focus:ring-indigo-500 transition" style="color-scheme: dark;">
-                                </div>
-                                <div>
-                                    <label class="block text-xs text-gray-400 mb-1">Kode</label>
-                                    <div class="flex">
-                                        <span id="rtAirlineCode2" class="inline-flex items-center px-2 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600 text-xs">--</span>
-                                        <input type="text" id="rtFlightCode2" placeholder="QZ-200" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-2 focus:ring-2 focus:ring-indigo-500 transition">
-                                    </div>
-                                </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-barcode"></i> Kode (Pergi)</label>
+                            <div class="flex">
+                                <span id="rtAirlineCode1" class="inline-flex items-center px-3 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600">--</span>
+                                <input type="text" id="rtFlightCode1" placeholder="351" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-barcode"></i> Kode (Pulang)</label>
+                            <div class="flex">
+                                <span id="rtAirlineCode2" class="inline-flex items-center px-3 rounded-l-lg bg-gray-600 text-gray-300 border border-r-0 border-gray-600">--</span>
+                                <input type="text" id="rtFlightCode2" placeholder="200" class="w-full bg-gray-700 border border-gray-600 text-white rounded-r-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                         </div>
                     </div>
@@ -347,7 +324,6 @@
             rtDest1: document.getElementById('rtDest1'),
             rtSwapRoute1: document.getElementById('rtSwapRoute1'),
             rtIsPP: document.getElementById('rtIsPP'),
-            rtAddRouteBtn: document.getElementById('rtAddRouteBtn'),
             rtRoute2Container: document.getElementById('rtRoute2Container'),
             rtOrigin2: document.getElementById('rtOrigin2'),
             rtDest2: document.getElementById('rtDest2'),
@@ -358,17 +334,14 @@
             
             rtAirline1: document.getElementById('rtAirline1'),
             rtSameAirline: document.getElementById('rtSameAirline'),
-            rtAddAirlineBtn: document.getElementById('rtAddAirlineBtn'),
             rtAirline2Container: document.getElementById('rtAirline2Container'),
             rtAirline2: document.getElementById('rtAirline2'),
             
             rtDepTime1: document.getElementById('rtDepTime1'),
-            rtArrTime1: document.getElementById('rtArrTime1'),
+            rtDepTime2: document.getElementById('rtDepTime2'),
+            
             rtAirlineCode1: document.getElementById('rtAirlineCode1'),
             rtFlightCode1: document.getElementById('rtFlightCode1'),
-            
-            rtDepTime2: document.getElementById('rtDepTime2'),
-            rtArrTime2: document.getElementById('rtArrTime2'),
             rtAirlineCode2: document.getElementById('rtAirlineCode2'),
             rtFlightCode2: document.getElementById('rtFlightCode2'),
 
@@ -453,25 +426,16 @@
             generateOutput();
         });
 
-        elements.rtAddRouteBtn.addEventListener('click', () => {
-            elements.rtIsPP.checked = false;
-            elements.rtRoute2Container.classList.remove('hidden');
-            elements.rtRoute2Container.classList.add('flex');
-            generateOutput();
-        });
-
         elements.rtSameAirline.addEventListener('change', (e) => {
             if(e.target.checked) {
                 elements.rtAirline2Container.classList.add('hidden');
+                elements.rtAirlineCode2.textContent = elements.rtAirlineCode1.textContent;
             } else {
                 elements.rtAirline2Container.classList.remove('hidden');
+                // Evaluasi ulang kode maskapai 2
+                const selectedAirline = airlines.find(a => a.name === elements.rtAirline2.value);
+                elements.rtAirlineCode2.textContent = selectedAirline ? selectedAirline.code : '--';
             }
-            generateOutput();
-        });
-
-        elements.rtAddAirlineBtn.addEventListener('click', () => {
-            elements.rtSameAirline.checked = false;
-            elements.rtAirline2Container.classList.remove('hidden');
             generateOutput();
         });
 
@@ -531,19 +495,24 @@
                     const d2 = new Date(elements.rtDate2.value);
                     
                     const day1 = d1.getUTCDate();
-                    const month1 = monthIndonesian[d1.getUTCMonth()];
+                    const month1Indo = monthIndonesian[d1.getUTCMonth()];
+                    const month1Short = monthEnglishShort[d1.getUTCMonth()];
                     const year1 = d1.getUTCFullYear();
                     
                     const day2 = d2.getUTCDate();
-                    const month2 = monthIndonesian[d2.getUTCMonth()];
+                    const month2Indo = monthIndonesian[d2.getUTCMonth()];
+                    const month2Short = monthEnglishShort[d2.getUTCMonth()];
                     const year2 = d2.getUTCFullYear();
 
-                    if (year1 === year2 && month1 === month2) {
-                        dateStr = `Tanggal ${day1} & ${day2} ${month1} ${year1}`;
+                    if (year1 === year2 && month1Indo === month2Indo) {
+                        // Bulan Sama
+                        dateStr = `Tanggal ${day1} & ${day2} ${month1Indo} ${year1}`;
                     } else if (year1 === year2) {
-                        dateStr = `Tanggal ${day1} ${month1} & ${day2} ${month2} ${year1}`;
+                        // Bulan Beda, Tahun Sama
+                        dateStr = `Tanggal ${day1} ${month1Short} & ${day2} ${month2Short} ${year1}`;
                     } else {
-                        dateStr = `Tanggal ${day1} ${month1} ${year1} & ${day2} ${month2} ${year2}`;
+                        // Tahun Beda
+                        dateStr = `Tanggal ${day1} ${month1Short} ${year1} & ${day2} ${month2Short} ${year2}`;
                     }
                 } else {
                     dateStr = "Tanggal DD & DD Bulan YYYY";
@@ -557,15 +526,13 @@
 
                 // 4. Time & Flight Code
                 const t1Dep = elements.rtDepTime1.value.replace(':', '.') || '00.00';
-                const t1Arr = elements.rtArrTime1.value.replace(':', '.') || '00.00';
                 const t2Dep = elements.rtDepTime2.value.replace(':', '.') || '00.00';
-                const t2Arr = elements.rtArrTime2.value.replace(':', '.') || '00.00';
                 
                 const c1 = `${elements.rtAirlineCode1.textContent}-${elements.rtFlightCode1.value || 'XXX'}`;
                 const c2 = `${elements.rtAirlineCode2.textContent}-${elements.rtFlightCode2.value || 'XXX'}`;
                 
-                // Format: Dep1-Arr1 & Dep2-Arr2 // Code1 & Code2
-                const timeCodeStr = `${t1Dep}-${t1Arr} & ${t2Dep}-${t2Arr} // ${c1} & ${c2}`;
+                // Format: Dep1 & Dep2 // Code1 & Code2
+                const timeCodeStr = `${t1Dep} & ${t2Dep} // ${c1} & ${c2}`;
 
                 finalOutput = `${routeStr}\n` +
                               `${dateStr}\n` +
@@ -696,12 +663,21 @@
                         x[i].parentNode.removeChild(x[i]);
                     }
                 }
-                // Handle Airline Code updates
-                if (inp.id === 'airline' || inp.id === 'rtAirline1' || inp.id === 'rtAirline2') {
+                
+                // Handle Sinkronisasi Airline Code 
+                if (inp.id === 'airline') {
                     const selectedAirline = airlines.find(a => a.name === inp.value);
-                    const codeTarget = inp.id === 'airline' ? elements.airlineCode : 
-                                      (inp.id === 'rtAirline1' ? elements.rtAirlineCode1 : elements.rtAirlineCode2);
-                    codeTarget.textContent = selectedAirline ? selectedAirline.code : '--';
+                    elements.airlineCode.textContent = selectedAirline ? selectedAirline.code : '--';
+                } else if (inp.id === 'rtAirline1') {
+                    const selectedAirline = airlines.find(a => a.name === inp.value);
+                    elements.rtAirlineCode1.textContent = selectedAirline ? selectedAirline.code : '--';
+                    // Jika Maskapai Pulang Sama diceklis, otomatis sinkronkan kode
+                    if (elements.rtSameAirline.checked) {
+                        elements.rtAirlineCode2.textContent = elements.rtAirlineCode1.textContent;
+                    }
+                } else if (inp.id === 'rtAirline2') {
+                    const selectedAirline = airlines.find(a => a.name === inp.value);
+                    elements.rtAirlineCode2.textContent = selectedAirline ? selectedAirline.code : '--';
                 }
                 generateOutput();
             }
@@ -771,8 +747,8 @@
         // Bind generateOutput to all relevant inputs
         const inputsToBind = [
             'flightDate', 'departureTime', 'arrivalTime', 'flightCode',
-            'rtDate1', 'rtDate2', 'rtDepTime1', 'rtArrTime1', 'rtFlightCode1',
-            'rtDepTime2', 'rtArrTime2', 'rtFlightCode2', 'excelPaste', 'imagePaste'
+            'rtDate1', 'rtDate2', 'rtDepTime1', 'rtDepTime2', 'rtFlightCode1', 'rtFlightCode2', 
+            'excelPaste', 'imagePaste'
         ];
         inputsToBind.forEach(id => {
             const el = document.getElementById(id);
