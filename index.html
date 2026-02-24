@@ -676,8 +676,11 @@
                         elements.rtAirlineCode2.textContent = elements.rtAirlineCode1.textContent;
                     }
                 } else if (inp.id === 'rtAirline2') {
-                    const selectedAirline = airlines.find(a => a.name === inp.value);
-                    elements.rtAirlineCode2.textContent = selectedAirline ? selectedAirline.code : '--';
+                    // Update kode maskapai pulang mandiri HANYA jika checkbox 'maskapai sama' tidak diceklis
+                    if (!elements.rtSameAirline.checked) {
+                        const selectedAirline = airlines.find(a => a.name === inp.value);
+                        elements.rtAirlineCode2.textContent = selectedAirline ? selectedAirline.code : '--';
+                    }
                 }
                 generateOutput();
             }
