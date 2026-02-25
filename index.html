@@ -78,14 +78,14 @@
                     <!-- Route -->
                     <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                         <div class="relative autocomplete w-full">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i>Penerbangan Asal</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Penerbangan Asal</label>
                             <input type="text" id="origin" placeholder="Contoh: JAKARTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
                         </div>
                         <div class="mt-2 md:mt-6">
                             <button id="swapRouteButton" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
                         </div>
                         <div class="relative autocomplete w-full">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i>Penerbangan Tujuan</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Penerbangan Tujuan</label>
                             <input type="text" id="destination" placeholder="Contoh: SINGAPORE (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 focus:outline-none transition">
                         </div>
                     </div>
@@ -128,14 +128,14 @@
                     <div>
                         <div class="flex flex-col md:flex-row items-center gap-2 md:gap-4">
                             <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i>Penerbangan Asal (Pergi)</label>
+                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Penerbangan Asal (Pergi)</label>
                                 <input type="text" id="rtOrigin1" placeholder="Contoh: JAKARTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                             <div class="mt-2 md:mt-6">
                                 <button id="rtSwapRoute1" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
                             </div>
                             <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i>Penerbangan Tujuan (Pulang)</label>
+                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Penerbangan Tujuan (Pulang)</label>
                                 <input type="text" id="rtDest1" placeholder="Contoh: KUALA LUMPUR (KUL)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                         </div>
@@ -151,14 +151,14 @@
                         <!-- Route 2 (Return/Multi) - Muncul jika Checkbox PP tidak dicentang -->
                         <div id="rtRoute2Container" class="hidden flex-col md:flex-row items-center gap-2 md:gap-4 mt-4">
                             <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i>Penerbangan Asal (Pergi)</label>
+                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-up w-4"></i> Penerbangan Asal (Pergi)</label>
                                 <input type="text" id="rtOrigin2" placeholder="Contoh: SINGAPORE (SIN)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                             <div class="mt-2 md:mt-6">
                                 <button id="rtSwapRoute2" class="p-2 w-10 h-10 rounded-full bg-gray-600 hover:bg-indigo-600 text-white transition-all"><i class="fa-solid fa-right-left"></i></button>
                             </div>
                             <div class="relative autocomplete w-full">
-                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i>Penerbangan Tujuan (Pulang)</label>
+                                <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-plane-arrival w-4"></i> Penerbangan Tujuan (Pulang)</label>
                                 <input type="text" id="rtDest2" placeholder="Contoh: JAKARTA (CGK)" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                             </div>
                         </div>
@@ -179,7 +179,7 @@
                     <!-- RT Airline -->
                     <div>
                         <div class="relative autocomplete">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pergi)</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i>  Maskapai (Pergi)</label>
                             <input type="text" id="rtAirline1" placeholder="Contoh: AirAsia Berhad" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                         </div>
 
@@ -193,7 +193,7 @@
                         
                         <!-- Airline 2 (Return) - Muncul jika Checkbox Maskapai Sama tidak dicentang -->
                         <div id="rtAirline2Container" class="hidden relative autocomplete mt-4">
-                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i> Maskapai (Pulang)</label>
+                            <label class="block text-sm font-medium text-gray-300 mb-1"><i class="fa-solid fa-jet-fighter w-4"></i>  Maskapai (Pulang)</label>
                             <input type="text" id="rtAirline2" placeholder="Contoh: Lion Air" class="w-full bg-gray-700 border border-gray-600 text-white rounded-lg p-3 focus:ring-2 focus:ring-indigo-500 transition">
                         </div>
                     </div>
